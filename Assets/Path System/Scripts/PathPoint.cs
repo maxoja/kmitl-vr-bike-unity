@@ -16,7 +16,7 @@ public class PathPoint : MonoBehaviour
     private float distance = 0;
 
     public Vector3 position { get { return transform.position; } }
-    public Quaternion rotation { get { return transform.rotation; } }
+    //public Quaternion rotation { get { return transform.rotation; } }
     public Vector3 up { get { return transform.up; } }
     public Vector3 right { get { return transform.right; } }
     public Vector3 forward { get { return transform.forward; } }

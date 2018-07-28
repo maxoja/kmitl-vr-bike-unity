@@ -378,93 +378,46 @@ MonoBehaviour:
   directionPoint: {fileID: 1896327211}
   hasBendPoint: 0
   startPoint: 1
---- !u!1 &924619400
+--- !u!1 &899655776
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 924619401}
-  - component: {fileID: 924619402}
+  - component: {fileID: 899655777}
+  - component: {fileID: 899655778}
   m_Layer: 0
-  m_Name: direction
+  m_Name: bend
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &924619401
+--- !u!4 &899655777
 Transform:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 924619400}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.0000001, y: 1, z: 1.0000001}
-  m_Children: []
-  m_Father: {fileID: 1139352903}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &924619402
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 924619400}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb109b585d5094024a7a9a7677432210, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!1 &1139352902
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1139352903}
-  - component: {fileID: 1139352904}
-  m_Layer: 0
-  m_Name: path point 3 (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1139352903
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1139352902}
-  m_LocalRotation: {x: -0, y: 0.8038569, z: -0, w: 0.5948228}
-  m_LocalPosition: {x: 52.1, y: 0, z: 45.8}
+  m_GameObject: {fileID: 899655776}
+  m_LocalRotation: {x: 0, y: 0.103313334, z: 0, w: 0.9946489}
+  m_LocalPosition: {x: 7.3, y: -0, z: -21}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 924619401}
-  m_Father: {fileID: 1641364717}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 107, z: 0}
---- !u!114 &1139352904
+  m_Children: []
+  m_Father: {fileID: 1157175876}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 11.86, z: 0}
+--- !u!114 &899655778
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1139352902}
+  m_GameObject: {fileID: 899655776}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42cfd216e1ee94771b06f0acc86e75b6, type: 3}
+  m_Script: {fileID: 11500000, guid: 5762de0dc7aa14bcf8532beb7278a629, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 2
-  beginPoint: {fileID: 1505479358}
-  bendPoint: {fileID: 0}
-  directionPoint: {fileID: 924619402}
-  hasBendPoint: 0
-  startPoint: 0
 --- !u!1 &1157175875
 GameObject:
   m_ObjectHideFlags: 0
@@ -488,11 +441,11 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1157175875}
   m_LocalRotation: {x: 0.000000033244863, y: -0.3766285, z: 7.3543444e-10, w: 0.92636436}
-  m_LocalPosition: {x: 3.2923388, y: 0.0000023549392, z: 14.358273}
+  m_LocalPosition: {x: -7.2, y: 0, z: 18.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1517657241}
   - {fileID: 1440237597}
+  - {fileID: 899655777}
   m_Father: {fileID: 1641364717}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: -50.08, z: 0}
@@ -509,7 +462,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 1
   beginPoint: {fileID: 895061445}
-  bendPoint: {fileID: 1517657242}
+  bendPoint: {fileID: 899655778}
   directionPoint: {fileID: 1440237596}
   hasBendPoint: 1
   startPoint: 0
@@ -591,7 +544,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1157175876}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1505479356
 GameObject:
@@ -641,46 +594,6 @@ MonoBehaviour:
   directionPoint: {fileID: 608983076}
   hasBendPoint: 1
   startPoint: 0
---- !u!1 &1517657240
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1517657241}
-  - component: {fileID: 1517657242}
-  m_Layer: 0
-  m_Name: bend
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1517657241
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1517657240}
-  m_LocalRotation: {x: -0.000000022472648, y: 0.7299833, z: -0.00000022448565, w: 0.68346494}
-  m_LocalPosition: {x: 3.6, y: -0, z: -14}
-  m_LocalScale: {x: 1.0001395, y: 1.0000023, z: 1.0001342}
-  m_Children: []
-  m_Father: {fileID: 1157175876}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 99.6, z: 0}
---- !u!114 &1517657242
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1517657240}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5762de0dc7aa14bcf8532beb7278a629, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1562614979
 GameObject:
   m_ObjectHideFlags: 0
@@ -704,7 +617,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1562614979}
   m_LocalRotation: {x: 0, y: 0.22580124, z: 0, w: 0.9741734}
-  m_LocalPosition: {x: -9.6, y: 0, z: 35.8}
+  m_LocalPosition: {x: -15.6, y: 0, z: 41}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1995964222}
@@ -762,20 +675,11 @@ MonoBehaviour:
   pathLineColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   drawGap: 0.3
   roadWidth: 6.5
-  startTrans: {fileID: 895061444}
   points:
-  - targetTrans: {fileID: 1157175876}
-    bendTrans: {fileID: 1517657241}
-    hasBendPoint: 1
-  - targetTrans: {fileID: 1562614980}
-    bendTrans: {fileID: 1995964222}
-    hasBendPoint: 1
-  - targetTrans: {fileID: 1505479357}
-    bendTrans: {fileID: 1407669805}
-    hasBendPoint: 1
-  - targetTrans: {fileID: 1139352903}
-    bendTrans: {fileID: 924619401}
-    hasBendPoint: 1
+  - {fileID: 895061445}
+  - {fileID: 1157175877}
+  - {fileID: 1562614981}
+  - {fileID: 1505479358}
 --- !u!4 &1641364717
 Transform:
   m_ObjectHideFlags: 0
@@ -790,7 +694,6 @@ Transform:
   - {fileID: 1157175876}
   - {fileID: 1562614980}
   - {fileID: 1505479357}
-  - {fileID: 1139352903}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

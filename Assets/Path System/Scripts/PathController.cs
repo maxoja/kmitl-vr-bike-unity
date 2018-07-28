@@ -16,41 +16,11 @@ public class PathController : MonoBehaviour
     [Range(0.1f, 20)]
     public float roadWidth = 4;
 
-    public Transform startTrans;
-    public PathPointt[] points;
+    public PathPoint[] points;
 
     private void ExtractPositions()
     {
-        if (transform.childCount < 2)
-            return;
-
-        int numChild = transform.childCount;
-        startTrans = transform.GetChild(0);
-        points = new PathPointt[numChild-1];
-
-        Transform prevTrans = startTrans;
-
-        for (int i = 1; i < numChild; i++)
-        {
-            Transform child = transform.GetChild(i);
-
-            PathPointt newPathPoint = new PathPointt();
-            newPathPoint.targetTrans = child;
-
-            if (child.childCount == 0)
-            {
-                newPathPoint.bendTrans = prevTrans;
-                newPathPoint.hasBendPoint = false;
-            }
-            else
-            {
-                newPathPoint.bendTrans = child.GetChild(0);
-                newPathPoint.hasBendPoint = true;
-            }
-
-            points[i-1] = newPathPoint;
-            prevTrans = newPathPoint.targetTrans;
-        }
+        points = GetComponentsInChildren<PathPoint>();
     }
 
     private void OnDrawGizmos()
@@ -58,30 +28,46 @@ public class PathController : MonoBehaviour
         //return;
         ExtractPositions();
 
-        Transform prevTrans = startTrans;
+        if (points.Length < 2)
+            return;
+        
+        PathPoint prevPoint = points[0];
+        Vector3 lastDrawPoint = prevPoint.position;
         float drawDistance = 0;
-        Vector3 lastDrawPoint = prevTrans.position;
 
-
-        foreach (PathPointt point in points)
+        foreach (PathPoint point in points)
         {
-            DrawHelper.DrawBendLine(point.targetTrans.position, point.bendTrans.position, bendPointColor);
+            if (point == points[0]) continue;
 
             GameObject tempObject = new GameObject();
             Transform tempTrans = tempObject.transform;
-            tempTrans.position = prevTrans.position;
-            tempTrans.rotation = prevTrans.rotation;
+            tempTrans.position = prevPoint.position;
+            tempTrans.rotation = prevPoint.directionPoint.rotation;
 
-            Vector3 a = prevTrans.position;
-            Vector3 prevPos = prevTrans.position;
-            Vector3 bendPos = 2*(point.bendTrans.position - point.targetTrans.position) + point.targetTrans.position;
-            Vector3 targetPos = point.targetTrans.position;
+            Vector3 a = prevPoint.position;
+            Vector3 prevPos = prevPoint.position;
+            Vector3 bendPos; // set later
+            Vector3 targetPos = point.position;
 
-            Quaternion r = prevTrans.rotation;
-            Quaternion bendRot = point.bendTrans.rotation;
-            Quaternion prevRot = prevTrans.rotation;
-            Quaternion targetRot = point.targetTrans.rotation;
+            Quaternion r = prevPoint.directionPoint.rotation;
+            Quaternion bendRot; // set later
+            Quaternion prevRot = prevPoint.directionPoint.rotation;
+            Quaternion targetRot = point.directionPoint.rotation;
 
+            if (point.hasBendPoint)
+            {
+                //has bend point
+                DrawHelper.DrawBendLine(point.position, point.bendPoint.position, bendPointColor);
+                bendPos = 2 * (point.bendPoint.position - point.position) + point.position;
+                bendRot = point.bendPoint.rotation;
+            }
+            else
+            {
+                //no bend point
+                bendPos = prevPoint.position;
+                bendRot = prevPoint.directionPoint.rotation;
+            }
+            
             for (int i = 1; i <= 20; i++)
             {
                 Vector3 latestPos = tempTrans.position;
@@ -108,31 +94,9 @@ public class PathController : MonoBehaviour
                 }
             }
 
-            prevTrans = point.targetTrans;
+            prevPoint = point;
             DestroyImmediate(tempObject);
 
-        }
-    }
-
-    [System.Serializable]
-    public class PathPointt
-    {
-        public Transform targetTrans;
-        public Transform bendTrans;
-        public bool hasBendPoint = false;
-
-        private float distance = 0;
-
-        public float GetDistance(){
-            return distance;
-        }
-
-        public void SetDistance(float newDistance) {
-            this.distance = newDistance;
-        }
-
-        public void AddDistance(float moreDistance) {
-            this.distance += moreDistance;
         }
     }
 
