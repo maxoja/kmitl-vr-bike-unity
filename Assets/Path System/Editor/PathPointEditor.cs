@@ -12,12 +12,13 @@ public class PathPointEditor : Editor {
 
         ExtractBeginningPoint(script);
         ExtractDirectionPoint(script);
+
         DrawTypeField(script);
 
         switch (script.type)
         {
             case PathPoint.PointType.StartPoint:
-                script.startPoint = true;
+                script.isLaunchPoint = true;
                 script.hasBendPoint = false;
 
                 RemoveBendPoint(script);
@@ -25,7 +26,7 @@ public class PathPointEditor : Editor {
 
             case PathPoint.PointType.WithBendPoint:
                 script.hasBendPoint = true;
-                script.startPoint = false;
+                script.isLaunchPoint = false;
 
                 ExtractBendPoint(script);
 
@@ -35,7 +36,7 @@ public class PathPointEditor : Editor {
 
             case PathPoint.PointType.WithoutBendPoint:
                 script.hasBendPoint = false;
-                script.startPoint = false;
+                script.isLaunchPoint = false;
 
                 RemoveBendPoint(script);
 
@@ -43,6 +44,7 @@ public class PathPointEditor : Editor {
                 break;
         }
 
+        DrawDistanceField(script);
     }
 
     // EXTRACTION //
@@ -50,7 +52,7 @@ public class PathPointEditor : Editor {
     {
         int siblingId = script.transform.GetSiblingIndex();
         if (siblingId > 0)
-            script.beginPoint = script.transform.parent.GetChild(siblingId - 1).GetComponent<PathPoint>();
+            script.sourcePoint = script.transform.parent.GetChild(siblingId - 1).GetComponent<PathPoint>();
     }
     private void ExtractDirectionPoint(PathPoint script)
     {
@@ -74,7 +76,8 @@ public class PathPointEditor : Editor {
         {
             GameObject newObject = new GameObject("bend");
             newObject.transform.parent = script.transform;
-            //newObject.transform.position = Vector3.Lerp(script.bendPoint.position, script.position, 0.5f);
+            newObject.transform.position = Vector3.Lerp(script.sourcePosition, script.position, 0.5f);
+            newObject.transform.rotation = script.rotation;
             script.bendPoint = newObject.AddComponent<BendPoint>();
         }
     }
@@ -83,15 +86,16 @@ public class PathPointEditor : Editor {
         script.bendPoint = script.GetComponentInChildren<BendPoint>();
 
         if (script.bendPoint != null)
-        {
-            Debug.Log("delete bend point");
             DestroyImmediate(script.bendPoint.gameObject);
-        }
 
         script.bendPoint = null;
     }
 
     // GUI DRAWING //
+    private void DrawDistanceField(PathPoint script)
+    {
+        EditorGUILayout.FloatField("Distance from source",script.GetDistance());
+    }
     private void DrawTypeField(PathPoint script)
     {
         script.type = (PathPoint.PointType)EditorGUILayout.EnumPopup("Point Type", script.type);
@@ -99,7 +103,7 @@ public class PathPointEditor : Editor {
 
     private void DrawBeginPointField(PathPoint script)
     {
-        EditorGUILayout.ObjectField("Begin Point",script.beginPoint, typeof(PathPoint), true);
+        EditorGUILayout.ObjectField("Source Point",script.sourcePoint, typeof(PathPoint), true);
     }
 
     private void DrawBendPointField(PathPoint script)

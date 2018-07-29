@@ -4,122 +4,205 @@ using System;
 using UnityEngine;
 using UnityEditor;
 
+//[ExecuteInEditMode]
 public class PathController : MonoBehaviour 
 {
-    public Color roadColor = Color.grey;
-    public Color bendPointColor = Color.cyan;
-    public Color pathPointColor = Color.magenta;
-    public Color pathLineColor = Color.yellow;
+    private Color roadColor = Color.grey;
+    private Color bendPointColor = Color.cyan;
+    private Color pathPointColor = Color.magenta;
+    private Color pathLineColor = Color.yellow;
 
     [Range(0.3f, 10)]
     public float drawGap = 1f;
     [Range(0.1f, 20)]
     public float roadWidth = 4;
+    [Range(10, 40)]
+    public int pathQuality = 20;
 
-    public PathPoint[] points;
+    private PathPoint[] points = null;
+    public float currentValue = 0f;
+    public Transform movingTrans;
 
-    private void ExtractPositions()
+    private void Start()
     {
-        points = GetComponentsInChildren<PathPoint>();
+        StartCoroutine(UpdateCoroutine());
+    }
+
+    private IEnumerator UpdateCoroutine()
+    {
+        yield return new WaitUntil(() => points != null);
+        //move
+        while (true)
+        {
+            currentValue += Time.deltaTime * 40;
+            float total = GetTotalDistance();
+            while (currentValue >= total)
+                currentValue -= total;
+
+            float ratiop = 0;
+            PathPoint pointp = null;
+            GetMixture(currentValue, ref pointp, ref ratiop);
+
+            Vector3 bp = 2 * (pointp.bendPoint.position - pointp.position) + pointp.position;
+            Vector3 ap = Vector3.Lerp(pointp.sourcePosition, bp, ratiop);
+            Quaternion rp = Quaternion.Lerp(pointp.sourceRotation, pointp.bendPoint.rotation, ratiop);
+
+
+            movingTrans.position = Vector3.Lerp(ap, pointp.position, ratiop);
+            movingTrans.rotation = Quaternion.Lerp(rp, pointp.rotation, ratiop);
+            yield return null;
+        }
+    }
+    private float GetTotalDistance(){
+        float total = 0;
+        foreach (PathPoint point in points)
+            total += point.GetDistance();
+        return total;
+    }
+
+    private void GetMixture(float leftover, ref PathPoint returnPoint, ref float returnRatio)
+    {
+        foreach(PathPoint point in points)
+        {
+            if(leftover < point.GetDistance())
+            {
+                returnPoint = point;
+                returnRatio = leftover / point.GetDistance();
+                return;
+            }
+
+            leftover -= point.GetDistance();
+        }
     }
 
     private void OnDrawGizmos()
     {
-        //return;
-        ExtractPositions();
+        ExtractPoints();
 
-        if (points.Length < 2)
+        if (TooFewPoints())
             return;
         
-        PathPoint prevPoint = points[0];
-        Vector3 lastDrawPoint = prevPoint.position;
-        float drawDistance = 0;
+        Vector3 launchPos = points[0].position;
+        Vector3 latestMarkPos = launchPos;
 
-        foreach (PathPoint point in points)
+        float distanceSinceLatestMark = 0;
+
+        foreach (PathPoint currentTarget in points)
         {
-            if (point == points[0]) continue;
+            if (IsFirstPoint(currentTarget)) 
+                continue;
 
-            GameObject tempObject = new GameObject();
-            Transform tempTrans = tempObject.transform;
-            tempTrans.position = prevPoint.position;
-            tempTrans.rotation = prevPoint.directionPoint.rotation;
+            float cumulativeDistance = 0;
 
-            Vector3 a = prevPoint.position;
-            Vector3 prevPos = prevPoint.position;
+            Transform tempTrans = new GameObject().transform;
+            tempTrans.parent = null;
+            tempTrans.position = currentTarget.sourcePosition;
+            tempTrans.rotation = currentTarget.sourceRotation;
+
+            Vector3 a = currentTarget.sourcePosition;
+            Vector3 prevPos = currentTarget.sourcePosition;
+            Vector3 targetPos = currentTarget.position;
+
+            Quaternion r = currentTarget.sourceRotation;
+            Quaternion prevRot = currentTarget.sourceRotation;
+            Quaternion targetRot = currentTarget.directionPoint.rotation;
+
             Vector3 bendPos; // set later
-            Vector3 targetPos = point.position;
-
-            Quaternion r = prevPoint.directionPoint.rotation;
             Quaternion bendRot; // set later
-            Quaternion prevRot = prevPoint.directionPoint.rotation;
-            Quaternion targetRot = point.directionPoint.rotation;
 
-            if (point.hasBendPoint)
+            if (currentTarget.hasBendPoint)
             {
                 //has bend point
-                DrawHelper.DrawBendLine(point.position, point.bendPoint.position, bendPointColor);
-                bendPos = 2 * (point.bendPoint.position - point.position) + point.position;
-                bendRot = point.bendPoint.rotation;
+                DrawBendLine(currentTarget.position, currentTarget.bendPoint.position);
+                bendPos = 2 * (currentTarget.bendPoint.position - currentTarget.position) + currentTarget.position;
+                bendRot = currentTarget.bendPoint.rotation;
+                bendRot = Quaternion.LerpUnclamped(currentTarget.rotation, currentTarget.bendPoint.rotation, 2);
             }
             else
             {
                 //no bend point
-                bendPos = prevPoint.position;
-                bendRot = prevPoint.directionPoint.rotation;
+                bendPos = currentTarget.sourcePosition;
+                bendRot = currentTarget.sourceRotation;
             }
             
-            for (int i = 1; i <= 20; i++)
+            for (int i = 1; i <= pathQuality; i++)
             {
+                float lerpRatio = 1f/pathQuality * i;
                 Vector3 latestPos = tempTrans.position;
 
-                a = Vector3.Lerp(prevPos, bendPos, 1f / 20 * i);
-                tempTrans.position = Vector3.Lerp(a, targetPos, 1f / 20 * i);
+                a = Vector3.Lerp(prevPos, bendPos, lerpRatio);
+                tempTrans.position = Vector3.Lerp(a, targetPos, lerpRatio);
 
-                r = Quaternion.Lerp(prevRot, bendRot, 1f / 20 * i);
-                tempTrans.rotation = Quaternion.Lerp(r, targetRot, 1f / 20 * i);
+                r = Quaternion.Lerp(prevRot, bendRot, lerpRatio);
+                tempTrans.rotation = Quaternion.Lerp(r, targetRot, lerpRatio);
 
                 float distance = Vector3.Distance(tempTrans.position, latestPos);
-                point.AddDistance(distance);
-                drawDistance += distance;
+                cumulativeDistance += distance;
+                distanceSinceLatestMark += distance;
 
-                while (drawDistance >= drawGap)
+                while (distanceSinceLatestMark >= drawGap)
                 {
-                    Vector3 adjusted = lastDrawPoint + (tempTrans.position - lastDrawPoint).normalized * drawGap;
+                    Vector3 adjusted = latestMarkPos + (tempTrans.position - latestMarkPos).normalized * drawGap;
 
-                    DrawHelper.DrawPathLine(lastDrawPoint, adjusted, pathLineColor);
-                    DrawHelper.DrawRoadBlock(adjusted, tempTrans, roadColor, roadWidth);
+                    DrawPathLine(latestMarkPos, adjusted);
+                    DrawRoadBlock(adjusted, tempTrans);
 
-                    lastDrawPoint = adjusted;
-                    drawDistance -= drawGap;
+                    latestMarkPos = adjusted;
+                    distanceSinceLatestMark -= drawGap;
                 }
             }
 
-            prevPoint = point;
-            DestroyImmediate(tempObject);
-
+            currentTarget.SetDistance(cumulativeDistance);
+            DestroyImmediate(tempTrans.gameObject);
         }
     }
 
-    private static class DrawHelper
+    // HELPERs
+    private bool TooFewPoints()
     {
-        public static void DrawRoadBlock(Vector3 position, Transform trans, Color color, float width)
-        {
-            Gizmos.color = color;
-            Gizmos.DrawLine(position, position + trans.right * width);
-            Gizmos.DrawLine(position, position - trans.right * width);
-        }
+        return points.Length < 2;
+    }
 
-        public static void DrawPathLine(Vector3 a, Vector3 b, Color color)
-        {
-            Gizmos.color = color;
-            Gizmos.DrawLine(a, b);
-        }
+    private bool IsFirstPoint(PathPoint point)
+    {
+        if (points == null || points.Length == 0)
+            return false;
+        else
+            return point == points[0];
+    }
 
-        public static void DrawBendLine(Vector3 a, Vector3 b, Color color)
-        {
-            Gizmos.color = color;
-            Gizmos.DrawLine(a, b);
-        }
+    // EXTRACTION
+    private void ExtractPoints()
+    {
+        points = GetComponentsInChildren<PathPoint>();
+    }
+
+    // GIZMOS DRAW HELPERs
+    private void DrawRoadBlock(Vector3 position, Transform trans)
+    {
+        return;
+        Gizmos.color = roadColor;
+        Gizmos.DrawLine(position, position + trans.right * roadWidth);
+        Gizmos.DrawLine(position, position - trans.right * roadWidth);
+
+        //return;
+        Gizmos.color = pathLineColor;
+        Gizmos.DrawLine(position, position - trans.up * roadWidth / 3);
+
+    }
+
+    private void DrawPathLine(Vector3 a, Vector3 b)
+    {
+        return;
+        Gizmos.color = pathLineColor;
+        Gizmos.DrawLine(a, b);
+    }
+
+    private void DrawBendLine(Vector3 a, Vector3 b)
+    {
+        return;
+        Gizmos.color = bendPointColor;
+        Gizmos.DrawLine(a, b);
     }
 }
 
