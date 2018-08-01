@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class BendPoint : MonoBehaviour 
 {
-    public Vector3 position { get { return this.transform.position; } }
     public Quaternion rotation { get { return this.transform.rotation; } }
-    //todo draw arrow for bend points
+    private Vector3 position { get { return this.transform.position; } }
 
     private const float gizmoLength = 4;
     private const float gizmoWidth = 0.5f;

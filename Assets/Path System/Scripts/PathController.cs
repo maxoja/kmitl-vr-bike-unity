@@ -4,24 +4,49 @@ using System;
 using UnityEngine;
 using UnityEditor;
 
+
+//todo steady speed
+//todo fix imperfect joint
+
 //[ExecuteInEditMode]
 public class PathController : MonoBehaviour 
 {
-    private Color roadColor = Color.grey;
-    private Color bendPointColor = Color.cyan;
-    private Color pathPointColor = Color.magenta;
-    private Color pathLineColor = Color.yellow;
+    private static Color roadColor = Color.grey;
+    private static Color bendPointColor = Color.cyan*2;
+    private static Color pathPointColor = Color.magenta*2;
+    private static Color pathLineColor = Color.yellow*2;
+
+    //[SerializeField]
+    //private float factor = 1.5f;
+    //[SerializeField]
+    //[Range(-2,0)]
+    //public float factor2 = 10;
 
     [Range(0.3f, 10)]
-    public float drawGap = 1f;
+    public float drawBlockGap = 1f;
     [Range(0.1f, 20)]
     public float roadWidth = 4;
-    [Range(10, 40)]
+    [Range(5, 40)]
     public int pathQuality = 20;
+    [Range(1, 50)]
+    public int travelSpeed = 40;
+    [Range(1, 10)]
+    public int turnSoftness = 5;
 
     private PathPoint[] points = null;
-    public float currentValue = 0f;
+    private float currentValue = 0f;
     public Transform movingTrans;
+
+    [SerializeField]
+    private bool showPathLine = true;
+    [SerializeField]
+    private bool showPerpendicularLine = true;
+    [SerializeField]
+    private bool showRoad = true;
+    [SerializeField]
+    private bool showBendLine = true;
+    [SerializeField]
+    private bool showDots = true;
 
     private void Start()
     {
@@ -31,28 +56,42 @@ public class PathController : MonoBehaviour
     private IEnumerator UpdateCoroutine()
     {
         yield return new WaitUntil(() => points != null);
+        float total = GetTotalDistance();
         //move
         while (true)
         {
-            currentValue += Time.deltaTime * 40;
-            float total = GetTotalDistance();
+            currentValue += Time.deltaTime * travelSpeed;
+
             while (currentValue >= total)
                 currentValue -= total;
 
-            float ratiop = 0;
-            PathPoint pointp = null;
-            GetMixture(currentValue, ref pointp, ref ratiop);
+            float ratio = 0;
+            PathPoint point = null;
+            GetMixture(currentValue, ref point, ref ratio);
 
-            Vector3 bp = 2 * (pointp.bendPoint.position - pointp.position) + pointp.position;
-            Vector3 ap = Vector3.Lerp(pointp.sourcePosition, bp, ratiop);
-            Quaternion rp = Quaternion.Lerp(pointp.sourceRotation, pointp.bendPoint.rotation, ratiop);
+            movingTrans.position = GetPosOf(point, ratio);
+            movingTrans.rotation = Quaternion.Lerp(movingTrans.rotation, GetRotOf(point, ratio), Time.deltaTime*travelSpeed/turnSoftness);
 
+            //GetMixture(currentValue+0.5f, ref point, ref ratio);
+            //movingTrans.LookAt(GetPosOf(point, ratio));
 
-            movingTrans.position = Vector3.Lerp(ap, pointp.position, ratiop);
-            movingTrans.rotation = Quaternion.Lerp(rp, pointp.rotation, ratiop);
             yield return null;
         }
     }
+    private Quaternion GetRotOf(PathPoint point, float ratio)
+    {
+        Quaternion pinRot = Quaternion.Lerp(point.sourceRotation, point.bendRotation, ratio);
+        Quaternion resultRot = Quaternion.Lerp(pinRot, point.targetRotation, ratio);
+        return resultRot;
+    }
+
+    private Vector3 GetPosOf(PathPoint point, float ratio)
+    {
+        Vector3 pinPos = Vector3.Lerp(point.sourcePosition, point.bendPosition, ratio);
+        Vector3 resultPos = Vector3.Lerp(pinPos, point.position, ratio);
+        return resultPos;
+    }
+
     private float GetTotalDistance(){
         float total = 0;
         foreach (PathPoint point in points)
@@ -67,12 +106,17 @@ public class PathController : MonoBehaviour
             if(leftover < point.GetDistance())
             {
                 returnPoint = point;
-                returnRatio = leftover / point.GetDistance();
+                returnRatio = GetAdjustedLerpRatio(leftover / point.GetDistance(), point);
                 return;
             }
 
             leftover -= point.GetDistance();
         }
+    }
+
+    private float GetAdjustedLerpRatio(float ratio, PathPoint point)
+    {
+        return Mathf.Pow(ratio, point.lerpFactor);
     }
 
     private void OnDrawGizmos()
@@ -87,77 +131,72 @@ public class PathController : MonoBehaviour
 
         float distanceSinceLatestMark = 0;
 
-        foreach (PathPoint currentTarget in points)
+        foreach (PathPoint targetPoint in points)
         {
-            if (IsFirstPoint(currentTarget)) 
+            if (IsFirstPoint(targetPoint)) 
                 continue;
 
             float cumulativeDistance = 0;
+            Transform tempTrans = CreateTempTransform(targetPoint);
 
-            Transform tempTrans = new GameObject().transform;
-            tempTrans.parent = null;
-            tempTrans.position = currentTarget.sourcePosition;
-            tempTrans.rotation = currentTarget.sourceRotation;
+            // note : now, every path point which is not start point has bend point
+            // prepare vars using for pos calculation //
+            Vector3 sourcePos = targetPoint.sourcePosition;
+            Vector3 pinPos = targetPoint.sourcePosition;
+            Vector3 targetPos = targetPoint.position;
+            Vector3 resultPos = Vector3.zero;
+            Vector3 bendPos = targetPoint.bendPosition;
 
-            Vector3 a = currentTarget.sourcePosition;
-            Vector3 prevPos = currentTarget.sourcePosition;
-            Vector3 targetPos = currentTarget.position;
+            //DrawBendLine(targetPoint.position, targetPoint.bendPosition);
+            DrawBendLine(targetPoint.position, bendPos);
 
-            Quaternion r = currentTarget.sourceRotation;
-            Quaternion prevRot = currentTarget.sourceRotation;
-            Quaternion targetRot = currentTarget.directionPoint.rotation;
+            // prepare vars using for rot calculation //
+            Quaternion sourceRot = targetPoint.sourceRotation;
+            Quaternion pinRot = targetPoint.sourceRotation;
+            Quaternion targetRot = targetPoint.targetRotation;
+            Quaternion resultRot = Quaternion.identity;
+            Quaternion bendRot = targetPoint.bendRotation;
 
-            Vector3 bendPos; // set later
-            Quaternion bendRot; // set later
-
-            if (currentTarget.hasBendPoint)
-            {
-                //has bend point
-                DrawBendLine(currentTarget.position, currentTarget.bendPoint.position);
-                bendPos = 2 * (currentTarget.bendPoint.position - currentTarget.position) + currentTarget.position;
-                bendRot = currentTarget.bendPoint.rotation;
-                bendRot = Quaternion.LerpUnclamped(currentTarget.rotation, currentTarget.bendPoint.rotation, 2);
-            }
-            else
-            {
-                //no bend point
-                bendPos = currentTarget.sourcePosition;
-                bendRot = currentTarget.sourceRotation;
-            }
-            
             for (int i = 1; i <= pathQuality; i++)
             {
-                float lerpRatio = 1f/pathQuality * i;
-                Vector3 latestPos = tempTrans.position;
+                float baseRatio = i * (1f / pathQuality);
+                float lerpRatio = GetAdjustedLerpRatio(baseRatio, targetPoint);
+                Vector3 latestPrevPos = tempTrans.position;
 
-                a = Vector3.Lerp(prevPos, bendPos, lerpRatio);
-                tempTrans.position = Vector3.Lerp(a, targetPos, lerpRatio);
+                //calculate
+                pinPos = Vector3.Lerp(targetPoint.sourcePosition, bendPos, lerpRatio);
+                pinRot = Quaternion.Lerp(sourceRot, bendRot, lerpRatio);
+                resultPos = Vector3.Lerp(pinPos, targetPos, lerpRatio);
+                resultRot = Quaternion.Lerp(pinRot, targetRot, lerpRatio);
 
-                r = Quaternion.Lerp(prevRot, bendRot, lerpRatio);
-                tempTrans.rotation = Quaternion.Lerp(r, targetRot, lerpRatio);
+                //set calculated values to transform
+                tempTrans.position = resultPos;
+                tempTrans.rotation = resultRot;
+                float occurredDistance = Vector3.Distance(latestPrevPos, resultPos);
+                cumulativeDistance += occurredDistance;
+                distanceSinceLatestMark += occurredDistance;
 
-                float distance = Vector3.Distance(tempTrans.position, latestPos);
-                cumulativeDistance += distance;
-                distanceSinceLatestMark += distance;
-
-                while (distanceSinceLatestMark >= drawGap)
-                {
-                    Vector3 adjusted = latestMarkPos + (tempTrans.position - latestMarkPos).normalized * drawGap;
-
-                    DrawPathLine(latestMarkPos, adjusted);
-                    DrawRoadBlock(adjusted, tempTrans);
-
-                    latestMarkPos = adjusted;
-                    distanceSinceLatestMark -= drawGap;
-                }
+                //draw gizmos
+                DrawPathLine(latestPrevPos, resultPos);
+                DrawBlocks(ref distanceSinceLatestMark, ref latestMarkPos, tempTrans);
             }
 
-            currentTarget.SetDistance(cumulativeDistance);
+            targetPoint.SetDistance(cumulativeDistance);
             DestroyImmediate(tempTrans.gameObject);
         }
     }
 
     // HELPERs
+    private Transform CreateTempTransform(PathPoint target)
+    {
+        Transform t = new GameObject().transform;
+        t.parent = null;
+        t.position = target.sourcePosition;
+        t.rotation = target.sourceRotation;
+
+        return t;
+    }
+
     private bool TooFewPoints()
     {
         return points.Length < 2;
@@ -171,38 +210,69 @@ public class PathController : MonoBehaviour
             return point == points[0];
     }
 
-    // EXTRACTION
     private void ExtractPoints()
     {
         points = GetComponentsInChildren<PathPoint>();
     }
 
+
     // GIZMOS DRAW HELPERs
+    private void DrawBlocks(ref float distanceSinceLatestMark, ref Vector3 latestMarkPos, Transform tempTrans)
+    {
+        if (distanceSinceLatestMark < drawBlockGap)
+            return;
+
+        Vector3 offset = (tempTrans.position - latestMarkPos).normalized * drawBlockGap;
+        Vector3 drawPos = latestMarkPos + offset;
+
+        DrawRoadBlock(drawPos, tempTrans);
+
+        distanceSinceLatestMark -= drawBlockGap;
+        latestMarkPos = drawPos;
+
+        DrawBlocks(ref distanceSinceLatestMark, ref latestMarkPos, tempTrans);
+    }
+
     private void DrawRoadBlock(Vector3 position, Transform trans)
     {
-        return;
-        Gizmos.color = roadColor;
-        Gizmos.DrawLine(position, position + trans.right * roadWidth);
-        Gizmos.DrawLine(position, position - trans.right * roadWidth);
+        if (showRoad)
+        {
+            Gizmos.color = roadColor;
+            Gizmos.DrawLine(position, position + trans.right * roadWidth);
+            Gizmos.DrawLine(position, position - trans.right * roadWidth);
+        }
 
-        //return;
-        Gizmos.color = pathLineColor;
-        Gizmos.DrawLine(position, position - trans.up * roadWidth / 3);
-
+        if (showPerpendicularLine)
+        {
+            Gizmos.color = pathLineColor;
+            Gizmos.DrawLine(position, position - trans.up * roadWidth / 3);
+        }
     }
 
     private void DrawPathLine(Vector3 a, Vector3 b)
     {
-        return;
-        Gizmos.color = pathLineColor;
-        Gizmos.DrawLine(a, b);
+        if (showPathLine)
+        {
+            Gizmos.color = pathLineColor;
+            Gizmos.DrawLine(a, b);
+        }
+
+        if (showDots)
+        {
+            Gizmos.color = Color.white * 2;
+            Gizmos.DrawSphere(a, 0.2f);
+        }
     }
 
     private void DrawBendLine(Vector3 a, Vector3 b)
     {
-        return;
-        Gizmos.color = bendPointColor;
-        Gizmos.DrawLine(a, b);
+        if (!showBendLine)
+            return;
+        Gizmos.color = bendPointColor*2;
+
+        Vector3 knobPos = Vector3.Lerp(a, b, 0.4f);
+        Gizmos.DrawLine(a, knobPos);
+        Gizmos.DrawSphere(knobPos, 0.2f);
     }
 }
 

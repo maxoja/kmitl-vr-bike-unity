@@ -5,13 +5,28 @@ using UnityEditor;
 
 [CustomEditor(typeof(PathPoint))]
 public class PathPointEditor : Editor {
-    
+
+    protected virtual void OnSceneGUI(){
+        PathPoint script = target as PathPoint;
+
+        //if (Tools.current != Tool.Move)
+            //return;
+        
+        EditorGUI.BeginChangeCheck();
+        Vector3 newTargetPosition = Handles.PositionHandle(script.controlPointPos, Quaternion.identity);
+        Handles.PositionHandle(script.position - (script.controlPointPos-script.position), Quaternion.identity);
+
+        if (EditorGUI.EndChangeCheck())
+        {
+            Undo.RecordObject(script, "Change S");
+            script.controlPointPos = newTargetPosition;
+        }
+    }
     public override void OnInspectorGUI()
     {
         PathPoint script = target as PathPoint;
 
         ExtractBeginningPoint(script);
-        ExtractDirectionPoint(script);
 
         DrawTypeField(script);
 
@@ -20,31 +35,23 @@ public class PathPointEditor : Editor {
             case PathPoint.PointType.StartPoint:
                 script.isLaunchPoint = true;
                 script.hasBendPoint = false;
-
-                RemoveBendPoint(script);
                 break;
 
-            case PathPoint.PointType.WithBendPoint:
+            case PathPoint.PointType.WayPoint:
                 script.hasBendPoint = true;
                 script.isLaunchPoint = false;
 
-                ExtractBendPoint(script);
-
                 DrawBeginPointField(script);
-                DrawBendPointField(script);
-                break;
-
-            case PathPoint.PointType.WithoutBendPoint:
-                script.hasBendPoint = false;
-                script.isLaunchPoint = false;
-
-                RemoveBendPoint(script);
-
-                DrawBeginPointField(script);
+                DrawBendingFactorField(script);
+                DrawLerpFactorField(script);
+                DrawDistanceField(script);
                 break;
         }
 
-        DrawDistanceField(script);
+        DrawS(script);
+
+        //refresh PathController
+        SceneView.RepaintAll();
     }
 
     // EXTRACTION //
@@ -54,60 +61,37 @@ public class PathPointEditor : Editor {
         if (siblingId > 0)
             script.sourcePoint = script.transform.parent.GetChild(siblingId - 1).GetComponent<PathPoint>();
     }
-    private void ExtractDirectionPoint(PathPoint script)
-    {
-        script.directionPoint = script.GetComponentInChildren<DirectionPoint>();
-
-        if ( script.directionPoint == null )
-        {
-            GameObject newObject = new GameObject("direction");
-            newObject.transform.parent = script.transform;
-            newObject.transform.localPosition = Vector3.zero;
-            newObject.transform.localRotation = Quaternion.identity;
-            script.directionPoint = newObject.AddComponent<DirectionPoint>();
-        }
-    }
-    private void ExtractBendPoint(PathPoint script)
-    {
-        //return;   
-        script.bendPoint = script.GetComponentInChildren<BendPoint>();
-
-        if ( script.bendPoint == null )
-        {
-            GameObject newObject = new GameObject("bend");
-            newObject.transform.parent = script.transform;
-            newObject.transform.position = Vector3.Lerp(script.sourcePosition, script.position, 0.5f);
-            newObject.transform.rotation = script.rotation;
-            script.bendPoint = newObject.AddComponent<BendPoint>();
-        }
-    }
-    private void RemoveBendPoint(PathPoint script)
-    {
-        script.bendPoint = script.GetComponentInChildren<BendPoint>();
-
-        if (script.bendPoint != null)
-            DestroyImmediate(script.bendPoint.gameObject);
-
-        script.bendPoint = null;
-    }
 
     // GUI DRAWING //
+    private void DrawBendingFactorField(PathPoint script)
+    {
+        script.bendingFactor = EditorGUILayout.Slider("Bending Factor", script.bendingFactor, 1f, 3f);
+    }
+    private void DrawLerpFactorField(PathPoint script)
+    {
+        script.lerpFactor = EditorGUILayout.Slider("Lerp Factor", script.lerpFactor, 0.5f, 2f);
+    }
     private void DrawDistanceField(PathPoint script)
     {
+        EditorGUI.BeginDisabledGroup(true);
         EditorGUILayout.FloatField("Distance from source",script.GetDistance());
+        EditorGUI.EndDisabledGroup();
     }
     private void DrawTypeField(PathPoint script)
     {
         script.type = (PathPoint.PointType)EditorGUILayout.EnumPopup("Point Type", script.type);
     }
-
     private void DrawBeginPointField(PathPoint script)
     {
+        EditorGUI.BeginDisabledGroup(true);
         EditorGUILayout.ObjectField("Source Point",script.sourcePoint, typeof(PathPoint), true);
+        EditorGUI.EndDisabledGroup();
     }
-
-    private void DrawBendPointField(PathPoint script)
+    private void DrawS(PathPoint script)
     {
-        EditorGUILayout.ObjectField("Bend Point", script.bendPoint, typeof(BendPoint), true);
+        EditorGUI.BeginDisabledGroup(true);
+        EditorGUILayout.Vector3Field("S", script.controlPointPos);
+        EditorGUI.EndDisabledGroup();
     }
 }
+

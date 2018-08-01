@@ -7,6 +7,8 @@ public class DirectionPoint : MonoBehaviour
 {
     public Quaternion rotation { get { return transform.rotation; } }
     public Vector3 forward { get { return transform.forward; } }
+    public Vector3 up { get { return transform.up; } }
+    public Vector3 right{ get { return transform.right; } }
 
     private const float gizmoLength = 4;
     private const float gizmoWidth = 0.5f;
