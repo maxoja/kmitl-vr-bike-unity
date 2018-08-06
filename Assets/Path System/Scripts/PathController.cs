@@ -4,9 +4,8 @@ using System;
 using UnityEngine;
 using UnityEditor;
 
-
 //todo steady speed
-//todo fix imperfect joint
+//done fix imperfect joint
 
 //[ExecuteInEditMode]
 public class PathController : MonoBehaviour 
@@ -70,25 +69,42 @@ public class PathController : MonoBehaviour
             GetMixture(currentValue, ref point, ref ratio);
 
             movingTrans.position = GetPosOf(point, ratio);
-            movingTrans.rotation = Quaternion.Lerp(movingTrans.rotation, GetRotOf(point, ratio), Time.deltaTime*travelSpeed/turnSoftness);
+            //movingTrans.rotation = Quaternion.Lerp(movingTrans.rotation, GetRotOf(point, ratio), Time.deltaTime*travelSpeed/turnSoftness);
 
-            //GetMixture(currentValue+0.5f, ref point, ref ratio);
-            //movingTrans.LookAt(GetPosOf(point, ratio));
+            GetMixture(currentValue+0.5f, ref point, ref ratio);
+            movingTrans.LookAt(GetPosOf(point, ratio));
 
             yield return null;
         }
     }
-    private Quaternion GetRotOf(PathPoint point, float ratio)
+    private Vector3 QuadraticLerp(Vector3 a, Vector3 control, Vector3 b, float percentage)
     {
-        Quaternion pinRot = Quaternion.Lerp(point.sourceRotation, point.bendRotation, ratio);
-        Quaternion resultRot = Quaternion.Lerp(pinRot, point.targetRotation, ratio);
-        return resultRot;
+        Vector3 p1 = Vector3.Lerp(a, control, percentage);
+        Vector3 p2 = Vector3.Lerp(control, b, percentage);
+        return Vector3.Lerp(p1, p2, percentage);
+
+        Vector3 p0 = Vector3.Lerp(a, control, percentage);
+        return Vector3.Lerp(p0, b, percentage);
     }
 
-    private Vector3 GetPosOf(PathPoint point, float ratio)
+    //private Quaternion GetRotOf(PathPoint point, float ratio)
+    //{
+    //    Quaternion pinRot = Quaternion.Lerp(point.sourceRotation, point.bendRotation, ratio);
+    //    Quaternion resultRot = Quaternion.Lerp(pinRot, point.targetRotation, ratio);
+    //    return resultRot;
+    //}
+
+    private Vector3 GetPosOf(PathPoint point, float percentage)
     {
-        Vector3 pinPos = Vector3.Lerp(point.sourcePosition, point.bendPosition, ratio);
-        Vector3 resultPos = Vector3.Lerp(pinPos, point.position, ratio);
+        Vector3 a = point.sourcePosition;
+        Vector3 b = point.controlPositionA;
+        Vector3 c = point.controlPositionB;
+        Vector3 d = point.position;
+
+        Vector3 p1 = QuadraticLerp(a, b, c, percentage);
+        Vector3 p2 = QuadraticLerp(b, c, d, percentage);
+
+        Vector3 resultPos = Vector3.Lerp(p1, p2, percentage);
         return resultPos;
     }
 
@@ -116,7 +132,12 @@ public class PathController : MonoBehaviour
 
     private float GetAdjustedLerpRatio(float ratio, PathPoint point)
     {
-        return Mathf.Pow(ratio, point.lerpFactor);
+        return ratio;
+        float distA = Vector3.Distance(point.sourcePosition, point.controlPositionA);
+        float distB = Vector3.Distance(point.targetPosition, point.controlPositionB);
+        float deltaDist = distA - distB;
+        return Mathf.Pow(ratio, 1 + deltaDist*0.025f);
+        //return Mathf.Pow(ratio, point.lerpFactor);
     }
 
     private void OnDrawGizmos()
@@ -142,36 +163,37 @@ public class PathController : MonoBehaviour
             // note : now, every path point which is not start point has bend point
             // prepare vars using for pos calculation //
             Vector3 sourcePos = targetPoint.sourcePosition;
-            Vector3 pinPos = targetPoint.sourcePosition;
+            Vector3 controlPosA = targetPoint.controlPositionA;
+            Vector3 controlPosB = targetPoint.controlPositionB;
             Vector3 targetPos = targetPoint.position;
             Vector3 resultPos = Vector3.zero;
-            Vector3 bendPos = targetPoint.bendPosition;
 
             //DrawBendLine(targetPoint.position, targetPoint.bendPosition);
-            DrawBendLine(targetPoint.position, bendPos);
+            //DrawBendLine(targetPoint.position, bendPos);
 
             // prepare vars using for rot calculation //
-            Quaternion sourceRot = targetPoint.sourceRotation;
-            Quaternion pinRot = targetPoint.sourceRotation;
-            Quaternion targetRot = targetPoint.targetRotation;
-            Quaternion resultRot = Quaternion.identity;
-            Quaternion bendRot = targetPoint.bendRotation;
+            //Quaternion sourceRot = targetPoint.sourceRotation;
+            //Quaternion pinRot = targetPoint.sourceRotation;
+            //Quaternion targetRot = targetPoint.targetRotation;
+            //Quaternion resultRot = Quaternion.identity;
+            //Quaternion bendRot = targetPoint.bendRotation;
 
+            string result = "";
             for (int i = 1; i <= pathQuality; i++)
             {
                 float baseRatio = i * (1f / pathQuality);
                 float lerpRatio = GetAdjustedLerpRatio(baseRatio, targetPoint);
+
                 Vector3 latestPrevPos = tempTrans.position;
 
                 //calculate
-                pinPos = Vector3.Lerp(targetPoint.sourcePosition, bendPos, lerpRatio);
-                pinRot = Quaternion.Lerp(sourceRot, bendRot, lerpRatio);
-                resultPos = Vector3.Lerp(pinPos, targetPos, lerpRatio);
-                resultRot = Quaternion.Lerp(pinRot, targetRot, lerpRatio);
+                //pinRot = Quaternion.Lerp(sourceRot, bendRot, lerpRatio);
+                resultPos = GetPosOf(targetPoint, lerpRatio);
+                //resultRot = Quaternion.Lerp(pinRot, targetRot, lerpRatio);
 
                 //set calculated values to transform
                 tempTrans.position = resultPos;
-                tempTrans.rotation = resultRot;
+                //tempTrans.rotation = resultRot;
                 float occurredDistance = Vector3.Distance(latestPrevPos, resultPos);
                 cumulativeDistance += occurredDistance;
                 distanceSinceLatestMark += occurredDistance;
@@ -179,7 +201,12 @@ public class PathController : MonoBehaviour
                 //draw gizmos
                 DrawPathLine(latestPrevPos, resultPos);
                 DrawBlocks(ref distanceSinceLatestMark, ref latestMarkPos, tempTrans);
+
+                result += cumulativeDistance;
+                result += ", ";
             }
+            result += targetPoint.gameObject.name;
+            Debug.Log(result);
 
             targetPoint.SetDistance(cumulativeDistance);
             DestroyImmediate(tempTrans.gameObject);
@@ -192,7 +219,7 @@ public class PathController : MonoBehaviour
         Transform t = new GameObject().transform;
         t.parent = null;
         t.position = target.sourcePosition;
-        t.rotation = target.sourceRotation;
+        //t.rotation = target.sourceRotation;
 
         return t;
     }

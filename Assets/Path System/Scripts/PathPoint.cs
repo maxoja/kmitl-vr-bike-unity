@@ -21,12 +21,14 @@ public class PathPoint : MonoBehaviour
     private const float gizmoWidth = 0.5f;
 
     public Vector3 position { get { return transform.position; } }
-    public Quaternion rotation { get { return this.targetRotation; } }
+    //public Quaternion rotation { get { return this.targetRotation; } }
     public Vector3 up { get { return transform.up; } }
     public Vector3 right { get { return transform.right; } }
     public Vector3 forward { get { return transform.forward; } }
-    public Vector3 controlPositionA { get { return controlPointPos; }}
-    public Vector3 controlPositionB { get { return position - (controlPointPos - position);} }
+    protected Vector3 controlPositionFront { get { return controlPointPos + position; } }
+    protected Vector3 controlPositionBack { get { return position - controlPointPos; } }
+    public Vector3 controlPositionA { get { return sourcePoint.controlPositionFront; }}
+    public Vector3 controlPositionB { get { return this.controlPositionBack; }}
 
     public Vector3 sourcePosition { 
         get { 
@@ -35,25 +37,25 @@ public class PathPoint : MonoBehaviour
             return sourcePoint.position; 
         }
     }
-    public Quaternion sourceRotation { 
-       get { 
-            if(sourcePoint == null)
-                return Quaternion.identity;
-            return sourcePoint.rotation; 
-        }
-    }
+    //public Quaternion sourceRotation { 
+    //   get { 
+    //        if(sourcePoint == null)
+    //            return Quaternion.identity;
+    //        return sourcePoint.rotation; 
+    //    }
+    //}
     public Vector3 targetPosition{get{return transform.position;}}
-    public Quaternion targetRotation{get{return transform.rotation;}}
-    public Vector3 bendPosition
-    {
-        get {
-            if (sourcePoint == null)
-                return Vector3.zero;
-            return ExtractBendingPosition();
-        }
-    }
+    //public Quaternion targetRotation{get{return transform.rotation;}}
+    //public Vector3 bendPosition
+    //{
+    //    get {
+    //        if (sourcePoint == null)
+    //            return Vector3.zero;
+    //        return ExtractBendingPosition();
+    //    }
+    //}
 
-    public Quaternion bendRotation{get{return sourceRotation;}}
+    //public Quaternion bendRotation{get{return sourceRotation;}}
 
     private void OnDrawGizmos()
     {

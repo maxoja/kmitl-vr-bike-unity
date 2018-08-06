@@ -6,22 +6,42 @@ using UnityEditor;
 [CustomEditor(typeof(PathPoint))]
 public class PathPointEditor : Editor {
 
-    protected virtual void OnSceneGUI(){
+    protected virtual void OnSceneGUI()
+    {
         PathPoint script = target as PathPoint;
 
-        //if (Tools.current != Tool.Move)
-            //return;
-        
         EditorGUI.BeginChangeCheck();
-        Vector3 newTargetPosition = Handles.PositionHandle(script.controlPointPos, Quaternion.identity);
-        Handles.PositionHandle(script.position - (script.controlPointPos-script.position), Quaternion.identity);
+
+        Vector3 oldControlPointPos = script.controlPointPos;
+        Vector3 thisPosition = script.transform.position;
+        Vector3 frontControlPosition = thisPosition + oldControlPointPos;
+        Vector3 backControlPosition = thisPosition - oldControlPointPos;
+        Vector3 updatedControlPosition = oldControlPointPos;
+
+        Quaternion frontKnobRotation = Quaternion.LookRotation(oldControlPointPos);
+        Quaternion backKnobRotation = Quaternion.LookRotation(-oldControlPointPos);
+
+        Handles.color = Color.cyan;
+        Handles.ConeCap(0, frontControlPosition, frontKnobRotation, 1);
+        Handles.DrawAAPolyLine(15, new Vector3[] {frontControlPosition, backControlPosition});
+        Handles.ConeCap(0, backControlPosition, backKnobRotation, 1);
+
+
+        if(Tools.current == Tool.Move)
+        {
+            updatedControlPosition = Handles.PositionHandle(frontControlPosition, Quaternion.identity) - thisPosition;
+            Vector3 updatedControlPositionB = Handles.PositionHandle(backControlPosition, Quaternion.identity) - thisPosition;
+            if (updatedControlPosition == oldControlPointPos)
+                updatedControlPosition = -updatedControlPositionB;
+        }
 
         if (EditorGUI.EndChangeCheck())
         {
             Undo.RecordObject(script, "Change S");
-            script.controlPointPos = newTargetPosition;
+            script.controlPointPos = updatedControlPosition;
         }
     }
+
     public override void OnInspectorGUI()
     {
         PathPoint script = target as PathPoint;
@@ -69,7 +89,7 @@ public class PathPointEditor : Editor {
     }
     private void DrawLerpFactorField(PathPoint script)
     {
-        script.lerpFactor = EditorGUILayout.Slider("Lerp Factor", script.lerpFactor, 0.5f, 2f);
+        script.lerpFactor = EditorGUILayout.Slider("Lerp Factor", script.lerpFactor, 0.1f, 2f);
     }
     private void DrawDistanceField(PathPoint script)
     {
