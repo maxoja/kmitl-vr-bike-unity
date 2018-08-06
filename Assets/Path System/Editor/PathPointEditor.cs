@@ -5,6 +5,7 @@ using UnityEditor;
 
 [CustomEditor(typeof(PathPoint))]
 public class PathPointEditor : Editor {
+    const float coneSize = 2;
 
     protected virtual void OnSceneGUI()
     {
@@ -13,32 +14,32 @@ public class PathPointEditor : Editor {
         EditorGUI.BeginChangeCheck();
 
         Vector3 oldControlPointPos = script.controlPointPos;
+        Vector3 newControlPosition = oldControlPointPos;
+
         Vector3 thisPosition = script.transform.position;
-        Vector3 frontControlPosition = thisPosition + oldControlPointPos;
-        Vector3 backControlPosition = thisPosition - oldControlPointPos;
-        Vector3 updatedControlPosition = oldControlPointPos;
+        Vector3 frontBendKnob = thisPosition + oldControlPointPos;
+        Vector3 backBendKnob = thisPosition - oldControlPointPos;
 
         Quaternion frontKnobRotation = Quaternion.LookRotation(oldControlPointPos);
         Quaternion backKnobRotation = Quaternion.LookRotation(-oldControlPointPos);
 
         Handles.color = Color.cyan;
-        Handles.ConeCap(0, frontControlPosition, frontKnobRotation, 1);
-        Handles.DrawAAPolyLine(15, new Vector3[] {frontControlPosition, backControlPosition});
-        Handles.ConeCap(0, backControlPosition, backKnobRotation, 1);
-
+        Handles.ConeCap(0, frontBendKnob, frontKnobRotation, coneSize);
+        Handles.DrawAAPolyLine(15, new Vector3[] {frontBendKnob, backBendKnob});
+        Handles.ConeCap(0, backBendKnob, frontKnobRotation, coneSize);
 
         if(Tools.current == Tool.Move)
         {
-            updatedControlPosition = Handles.PositionHandle(frontControlPosition, Quaternion.identity) - thisPosition;
-            Vector3 updatedControlPositionB = Handles.PositionHandle(backControlPosition, Quaternion.identity) - thisPosition;
-            if (updatedControlPosition == oldControlPointPos)
-                updatedControlPosition = -updatedControlPositionB;
+            newControlPosition = Handles.PositionHandle(frontBendKnob, Quaternion.identity) - thisPosition;
+            Vector3 updatedControlPositionB = Handles.PositionHandle(backBendKnob, Quaternion.identity) - thisPosition;
+            if (newControlPosition == oldControlPointPos)
+                newControlPosition = -updatedControlPositionB;
         }
 
         if (EditorGUI.EndChangeCheck())
         {
             Undo.RecordObject(script, "Change S");
-            script.controlPointPos = updatedControlPosition;
+            script.controlPointPos = newControlPosition;
         }
     }
 

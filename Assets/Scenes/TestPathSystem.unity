@@ -566,7 +566,7 @@ MonoBehaviour:
   isLaunchPoint: 1
   bendingFactor: 2
   lerpFactor: 1.5
-  controlPointPos: {x: 2.0159435, y: 0, z: 17.247633}
+  controlPointPos: {x: 2.0159435, y: -0, z: 17.017593}
 --- !u!1 &995203213
 GameObject:
   m_ObjectHideFlags: 0
@@ -600,7 +600,7 @@ MonoBehaviour:
   isLaunchPoint: 0
   bendingFactor: 2
   lerpFactor: 0.9
-  controlPointPos: {x: -4.6936398, y: 3.699788, z: -0.39734936}
+  controlPointPos: {x: -4.516592, y: -7.2239857, z: -0.39734936}
 --- !u!4 &995203215
 Transform:
   m_ObjectHideFlags: 0
@@ -741,7 +741,7 @@ MonoBehaviour:
   isLaunchPoint: 0
   bendingFactor: 2
   lerpFactor: 0.5
-  controlPointPos: {x: -10.40353, y: 7.2405148, z: 0.52073526}
+  controlPointPos: {x: -7.20401, y: 5.266361, z: 0.52073526}
 --- !u!4 &1435170514
 Transform:
   m_ObjectHideFlags: 0
@@ -988,7 +988,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1641364715}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 13.3, y: 0, z: 0.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 895061444}
@@ -1149,4 +1149,4 @@ MonoBehaviour:
   isLaunchPoint: 0
   bendingFactor: 2
   lerpFactor: 0.91
-  controlPointPos: {x: -6.9387093, y: 13.6596775, z: -0.6301017}
+  controlPointPos: {x: -9.0862465, y: -1.7683802, z: -0.6301017}
