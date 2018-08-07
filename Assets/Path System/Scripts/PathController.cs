@@ -6,6 +6,7 @@ using UnityEditor;
 
 //todo steady speed
 //done fix imperfect joint
+//comment to create checkpoint
 
 //[ExecuteInEditMode]
 public class PathController : MonoBehaviour 
