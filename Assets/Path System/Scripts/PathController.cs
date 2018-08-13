@@ -44,8 +44,6 @@ public class PathController : MonoBehaviour
     [SerializeField]
     private bool showRoad = true;
     [SerializeField]
-    private bool showBendLine = true;
-    [SerializeField]
     private bool showDots = true;
 
     private void Start()
@@ -73,7 +71,7 @@ public class PathController : MonoBehaviour
             //movingTrans.rotation = Quaternion.Lerp(movingTrans.rotation, GetRotOf(point, ratio), Time.deltaTime*travelSpeed/turnSoftness);
 
             GetMixture(currentValue+0.5f, ref point, ref ratio);
-            movingTrans.LookAt(GetPosOf(point, ratio));
+            //movingTrans.LookAt(GetPosOf(point, ratio));
 
             yield return null;
         }
@@ -133,12 +131,13 @@ public class PathController : MonoBehaviour
 
     private float GetAdjustedLerpRatio(float ratio, PathPoint point)
     {
-        return ratio;
-        float distA = Vector3.Distance(point.sourcePosition, point.controlPositionA);
-        float distB = Vector3.Distance(point.targetPosition, point.controlPositionB);
-        float deltaDist = distA - distB;
-        return Mathf.Pow(ratio, 1 + deltaDist*0.025f);
-        //return Mathf.Pow(ratio, point.lerpFactor);
+        //return ratio;
+        //float distA = Vector3.Distance(point.sourcePosition, point.controlPositionA);
+        //float distB = Vector3.Distance(point.targetPosition, point.controlPositionB);
+        //float deltaDist = distA - distB;
+        //return Mathf.Pow(ratio, 1 + deltaDist*0.025f);
+
+        return Mathf.Pow(ratio, point.lerpFactor);
     }
 
     private void OnDrawGizmos()
@@ -207,7 +206,7 @@ public class PathController : MonoBehaviour
                 result += ", ";
             }
             result += targetPoint.gameObject.name;
-            Debug.Log(result);
+            //Debug.Log(result);
 
             targetPoint.SetDistance(cumulativeDistance);
             DestroyImmediate(tempTrans.gameObject);
@@ -290,17 +289,6 @@ public class PathController : MonoBehaviour
             Gizmos.color = Color.white * 2;
             Gizmos.DrawSphere(a, 0.2f);
         }
-    }
-
-    private void DrawBendLine(Vector3 a, Vector3 b)
-    {
-        if (!showBendLine)
-            return;
-        Gizmos.color = bendPointColor*2;
-
-        Vector3 knobPos = Vector3.Lerp(a, b, 0.4f);
-        Gizmos.DrawLine(a, knobPos);
-        Gizmos.DrawSphere(knobPos, 0.2f);
     }
 }
 

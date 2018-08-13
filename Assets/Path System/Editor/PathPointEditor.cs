@@ -63,7 +63,7 @@ public class PathPointEditor : Editor {
                 script.isLaunchPoint = false;
 
                 DrawBeginPointField(script);
-                DrawBendingFactorField(script);
+                //DrawBendingFactorField(script);
                 DrawLerpFactorField(script);
                 DrawDistanceField(script);
                 break;
@@ -83,11 +83,11 @@ public class PathPointEditor : Editor {
             script.sourcePoint = script.transform.parent.GetChild(siblingId - 1).GetComponent<PathPoint>();
     }
 
-    // GUI DRAWING //
-    private void DrawBendingFactorField(PathPoint script)
-    {
-        script.bendingFactor = EditorGUILayout.Slider("Bending Factor", script.bendingFactor, 1f, 3f);
-    }
+    //// GUI DRAWING //
+    //private void DrawBendingFactorField(PathPoint script)
+    //{
+    //    script.bendingFactor = EditorGUILayout.Slider("Bending Factor", script.bendingFactor, 1f, 3f);
+    //}
     private void DrawLerpFactorField(PathPoint script)
     {
         script.lerpFactor = EditorGUILayout.Slider("Lerp Factor", script.lerpFactor, 0.1f, 2f);

@@ -10,7 +10,7 @@ public class PathPoint : MonoBehaviour
     public PathPoint sourcePoint = null;
     public bool hasBendPoint = false;
     public bool isLaunchPoint = false;
-    public float bendingFactor = 2;
+    //public float bendingFactor = 2;
     public float lerpFactor = 1.5f;
 
 
@@ -104,29 +104,29 @@ public class PathPoint : MonoBehaviour
         WayPoint,
     }
 
-    private Vector3 ExtractBendingPosition()
-    {
-        Vector3 sourceHitPoint, targetHitPoint;
+    //private Vector3 ExtractBendingPosition()
+    //{
+    //    Vector3 sourceHitPoint, targetHitPoint;
 
-        Vector3 sourcePosA = sourcePosition;
-        Vector3 sourcePosB = sourcePosA + sourcePoint.forward * 10000;
+    //    Vector3 sourcePosA = sourcePosition;
+    //    Vector3 sourcePosB = sourcePosA + sourcePoint.forward * 10000;
 
-        Vector3 targetPosA = position;
-        Vector3 targetPosB = targetPosA - forward * 10000;
+    //    Vector3 targetPosA = position;
+    //    Vector3 targetPosB = targetPosA - forward * 10000;
 
-        bool parallel = !ClosestPointsOnTwoLines(out sourceHitPoint, out targetHitPoint, sourcePosA, sourcePosB, targetPosA, targetPosB);
+    //    bool parallel = !ClosestPointsOnTwoLines(out sourceHitPoint, out targetHitPoint, sourcePosA, sourcePosB, targetPosA, targetPosB);
 
-        if (!parallel)
-        {
-            Vector3 mid = Vector3.Lerp(sourceHitPoint, targetHitPoint, 0.5f);
-            Vector3 difference = (mid - position);
-            Vector3 bendPos = position + difference * bendingFactor;
+    //    if (!parallel)
+    //    {
+    //        Vector3 mid = Vector3.Lerp(sourceHitPoint, targetHitPoint, 0.5f);
+    //        Vector3 difference = (mid - position);
+    //        Vector3 bendPos = position + difference * bendingFactor;
 
-            return bendPos;
-        }
+    //        return bendPos;
+    //    }
 
-        return sourcePosition;
-    }
+    //    return sourcePosition;
+    //}
 
     //Two non-parallel lines which may or may not touch each other have a point on each line which are closest
     //to each other. This function finds those two points. If the lines are not parallel, the function 
