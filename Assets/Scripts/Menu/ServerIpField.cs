@@ -2,11 +2,11 @@
 using UnityEngine.UI;
 
 public class ServerIpField : MonoBehaviour {
-    private InputField inputComp;
+    private InputFieldCaretPosition inputComp;
 
     private void Awake()
     {
-        inputComp = GetComponent<InputField>();
+        inputComp = GetComponent<InputFieldCaretPosition>();
         inputComp.text = StaticData.serverIp;
     }
 
