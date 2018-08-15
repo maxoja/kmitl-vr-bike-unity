@@ -21,32 +21,44 @@ public class TCPClient : MonoBehaviour {
     //connect to server
     void Start()
     {
-        Debug.Log("Connecting to Server!!");
-        clientSocket.BeginConnect(IP_ADDRESS, PORT, new AsyncCallback(ConnectCallback), clientSocket);
+        ConnectToServer();
     }
     
 
-    private void ConnectCallback(IAsyncResult ar)
+    private void ConnectToServer()
     {
-        clientSocket.EndConnect(ar);
+        Debug.Log("Connecting to Server!!");
+        IP_ADDRESS = StaticData.serverIp;
+        PORT = int.Parse(StaticData.serverPort);
+        clientSocket.BeginConnect(IP_ADDRESS, PORT, new AsyncCallback(OnConnected), clientSocket);
+    }
+
+    private void OnConnected(IAsyncResult result)
+    {
+        clientSocket.EndConnect(result);
 
         while (true)
         {
-            onRecieve();
+            ReceiveLoop();
         }
     }
 
     //recieve the data from server (Asynchronous)
-    public void onRecieve()
+    public void ReceiveLoop()
     {
         try
         {
             PacketBuffer buffer = new PacketBuffer();
             buffer.currentSocket = clientSocket;
-
+            int offset = 0;
+            SocketFlags flag = 0;
             // Begin asynchronous receiving
-            clientSocket.BeginReceive(buffer.buffer, 0, PacketBuffer.BufferSize, 0,
-                new AsyncCallback(ReceiveCallback), buffer);
+            clientSocket.BeginReceive(
+                buffer.buffer, 
+                offset, 
+                PacketBuffer.BufferSize, 
+                flag,
+                new AsyncCallback(OnReceiveData), buffer);
         }
         catch (Exception e)
         {
@@ -54,7 +66,7 @@ public class TCPClient : MonoBehaviour {
         }
     }
 
-    private void ReceiveCallback(IAsyncResult ar)
+    private void OnReceiveData(IAsyncResult ar)
     {
             PacketBuffer buffer = (PacketBuffer)ar.AsyncState;
             Socket client = buffer.currentSocket;
@@ -65,7 +77,7 @@ public class TCPClient : MonoBehaviour {
                 buffer.stringBuilder.Append(Encoding.ASCII.GetString(buffer.buffer, 0, bytesRead));
 
                 client.BeginReceive(buffer.buffer, 0, PacketBuffer.BufferSize, 0,
-                    new AsyncCallback(ReceiveCallback), buffer);
+                    new AsyncCallback(OnReceiveData), buffer);
             }
             else
             {
@@ -76,6 +88,10 @@ public class TCPClient : MonoBehaviour {
             }
     }
 
+    public void sendString(string s)
+    {
+        sendData(Encoding.UTF8.GetBytes(s));
+    }
 
     //send data to server
     public void sendData(byte[] data)
