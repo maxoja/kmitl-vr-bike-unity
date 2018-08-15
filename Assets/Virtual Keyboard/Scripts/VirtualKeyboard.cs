@@ -20,6 +20,7 @@ public class VirtualKeyboard : MonoBehaviour {
 			keyboard = Instantiate<VirtualKeyboard>(Resources.Load<VirtualKeyboard>("VirtualKeyboard"));
 			keyboard.transform.SetParent(canvas.transform, false);
 			keyboard.inputObject = inputObject;
+
 		}
 		return keyboard;
 	}
@@ -79,7 +80,8 @@ public class VirtualKeyboard : MonoBehaviour {
 		InputFieldCaretPosition inputField = inputObject.GetComponent<InputFieldCaretPosition> ();
 
 		if (keyString.Length == 1 && keyString[0] == 8) {
-            inputField.text = "";
+            if (inputField.text.Length > 0)
+                inputField.text = inputField.text.Substring(0, inputField.text.Length - 1);
 			//if (text.Length > 0 && inputField.GetLocalCaretPosition () - 1 > -1) {
 			//	text = text.Remove (inputField.GetLocalCaretPosition () - 1, 1); 
 			//	inputField.currentPosition--;

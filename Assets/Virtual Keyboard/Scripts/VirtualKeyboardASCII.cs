@@ -16,6 +16,7 @@ public class VirtualKeyboardASCII : MonoBehaviour
 	}
 	
 	void Refresh() {
+        //alphaBoardUnsfhifted.SetActive(true);
 		alphaBoardUnsfhifted.SetActive(!AltDown && !ShiftDown);
 		alphaBoardSfhifted.SetActive(!AltDown && ShiftDown);
 		numberBoardUnshifted.SetActive(AltDown && !ShiftDown);
