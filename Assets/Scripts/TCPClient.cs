@@ -1,101 +1,110 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using System.Net.Sockets;
-using System.Net;
-using System.Text;
+﻿using UnityEngine;
+using System.Collections;
 using System;
+using System.IO;
+using System.Net.Sockets;
 
-public class TCPClient : MonoBehaviour {
+public class TCPClient : MonoBehaviour
+{
+    internal Boolean socketReady = false;
+    TcpClient mySocket;
+    NetworkStream theStream;
+    StreamWriter theWriter;
+    StreamReader theReader;
 
-    //setting the address information
-    public string IP_ADDRESS;
-    public int PORT;
+    public BezierWalker[] walker;
 
-    public Socket clientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-    private byte[] buffer = new byte[1024];
+    bool a = false;
 
-    //response value from server
-    private static String response = String.Empty;
-
-    //connect to server
     void Start()
     {
-        ConnectToServer();
-    }
-    
-
-    private void ConnectToServer()
-    {
-        Debug.Log("Connecting to Server!!");
-        IP_ADDRESS = StaticData.serverIp;
-        PORT = int.Parse(StaticData.serverPort);
-        clientSocket.BeginConnect(IP_ADDRESS, PORT, new AsyncCallback(OnConnected), clientSocket);
+        setupSocket(StaticData.serverIp, int.Parse(StaticData.serverPort));
     }
 
-    private void OnConnected(IAsyncResult result)
+    void Update()
     {
-        clientSocket.EndConnect(result);
-
-        while (true)
+        if(!a)
         {
-            ReceiveLoop();
+            a = true;
+            writeSocket("'tagClient', ");
+            writeSocket("'setFrequency',5,"+StaticData.playerId.ToString());
         }
+
+        while(theStream.DataAvailable)
+        {
+            string receivedString = readSocket();
+            string[] listA = receivedString.Split(new char[] { '|' });
+            for (int i = 0; i < listA.Length; i++)
+            {
+                string s = listA[i];
+                string[] subList = s.Split(new char[] { ',' });
+                float position = float.Parse(subList[0]);
+                float velocity = float.Parse(subList[1]);
+
+                Debug.Log("player:"+i + " pos:" + position + " velo:" + velocity);
+                if (i < walker.Length)
+                {
+                    walker[i].SetProgress(position);
+                    walker[i].SetSpeed(velocity);
+                }
+            }
+        }
+        //print(readSocket());
+        //writeSocket("'getPosition'," + StaticData.playerId.ToString());
     }
 
-    //recieve the data from server (Asynchronous)
-    public void ReceiveLoop()
+    // **********************************************
+    public void setupSocket(string Host, int Port)
     {
         try
         {
-            PacketBuffer buffer = new PacketBuffer();
-            buffer.currentSocket = clientSocket;
-            int offset = 0;
-            SocketFlags flag = 0;
-            // Begin asynchronous receiving
-            clientSocket.BeginReceive(
-                buffer.buffer, 
-                offset, 
-                PacketBuffer.BufferSize, 
-                flag,
-                new AsyncCallback(OnReceiveData), buffer);
+            mySocket = new TcpClient(Host, Port);
+            theStream = mySocket.GetStream();
+            theWriter = new StreamWriter(theStream);
+            theReader = new StreamReader(theStream);
+            socketReady = true;
         }
         catch (Exception e)
         {
-            Console.WriteLine(e.ToString());
+            Debug.Log("Socket error: " + e);
         }
     }
 
-    private void OnReceiveData(IAsyncResult ar)
+    public void writeSocket(string theLine)
     {
-            PacketBuffer buffer = (PacketBuffer)ar.AsyncState;
-            Socket client = buffer.currentSocket;
-            int bytesRead = client.EndReceive(ar);
-
-            if (bytesRead > 0)
-            {
-                buffer.stringBuilder.Append(Encoding.ASCII.GetString(buffer.buffer, 0, bytesRead));
-
-                client.BeginReceive(buffer.buffer, 0, PacketBuffer.BufferSize, 0,
-                    new AsyncCallback(OnReceiveData), buffer);
-            }
-            else
-            {
-                if (buffer.stringBuilder.Length > 1)
-                {
-                    response = buffer.stringBuilder.ToString();
-                }
-            }
+        if (!socketReady)
+            return;
+        String foo = theLine + "\r\n";
+        theWriter.Write(foo);
+        theWriter.Flush();
     }
 
-    public void sendString(string s)
+    public String readSocket()
     {
-        sendData(Encoding.UTF8.GetBytes(s));
+        if (!socketReady)
+            return "";
+        if (theStream.DataAvailable)
+            return theReader.ReadLine();
+        return "";
     }
 
-    //send data to server
-    public void sendData(byte[] data)
+    public void closeSocket()
     {
-        clientSocket.Send(data);
+        if (!socketReady)
+            return;
+        theWriter.Close();
+        theReader.Close();
+        mySocket.Close();
+        socketReady = false;
     }
-}
+
+    public void OnDestroy()
+    {
+        closeSocket();
+    }
+
+    public void OnApplicationQuit()
+    {
+        closeSocket();
+    }
+} // end class s_TCP

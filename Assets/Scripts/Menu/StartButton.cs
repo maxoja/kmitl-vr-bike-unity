@@ -4,9 +4,11 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class StartButton : MonoBehaviour {
+    //public Scene scene;
 
     public void OnClick()
     {
-        SceneManager.LoadScene("Lobby");
+        SceneManager.LoadScene("Game");
+
     }
 }
