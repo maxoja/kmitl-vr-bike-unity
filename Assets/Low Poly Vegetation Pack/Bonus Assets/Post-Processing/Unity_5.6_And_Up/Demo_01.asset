@@ -25,11 +25,11 @@ MonoBehaviour:
         motionVectorsResolution: 24
         motionVectorsAmplitude: 64
   fog:
-    m_Enabled: 1
+    m_Enabled: 0
     m_Settings:
       excludeSkybox: 1
   antialiasing:
-    m_Enabled: 1
+    m_Enabled: 0
     m_Settings:
       method: 0
       fxaaSettings:
@@ -134,51 +134,36 @@ MonoBehaviour:
       colorWheels:
         mode: 0
         log:
-          slope:
-            r: 1
-            g: 1
-            b: 1
-            a: 0
-          power:
-            r: 1
-            g: 1
-            b: 1
-            a: 0
-          offset:
-            r: 1
-            g: 1
-            b: 1
-            a: 0
+          slope: {r: 1, g: 1, b: 1, a: 0}
+          power: {r: 1, g: 1, b: 1, a: 0}
+          offset: {r: 1, g: 1, b: 1, a: 0}
         linear:
-          lift:
-            r: 0.65481323
-            g: 0.5688245
-            b: 1
-            a: 0
-          gamma:
-            r: 1
-            g: 0.68825746
-            b: 0.80998623
-            a: 0
-          gain:
-            r: 1
-            g: 0.8302394
-            b: 0.9381994
-            a: 0
+          lift: {r: 0.65481323, g: 0.5688245, b: 1, a: 0}
+          gamma: {r: 1, g: 0.68825746, b: 0.80998623, a: 0}
+          gain: {r: 1, g: 0.8302394, b: 0.9381994, a: 0}
       curves:
         master:
           curve:
+            serializedVersion: 2
             m_Curve:
-            - time: 0
+            - serializedVersion: 3
+              time: 0
               value: 0
               inSlope: 1
               outSlope: 1
               tangentMode: 0
-            - time: 1
+              weightedMode: 0
+              inWeight: 0.33333334
+              outWeight: 0.33333334
+            - serializedVersion: 3
+              time: 1
               value: 1
               inSlope: 1
               outSlope: 1
               tangentMode: 0
+              weightedMode: 0
+              inWeight: 0.33333334
+              outWeight: 0.33333334
             m_PreInfinity: 2
             m_PostInfinity: 2
             m_RotationOrder: 0
@@ -187,17 +172,26 @@ MonoBehaviour:
           m_Range: 1
         red:
           curve:
+            serializedVersion: 2
             m_Curve:
-            - time: 0
+            - serializedVersion: 3
+              time: 0
               value: 0
               inSlope: 1
               outSlope: 1
               tangentMode: 0
-            - time: 1
+              weightedMode: 0
+              inWeight: 0.33333334
+              outWeight: 0.33333334
+            - serializedVersion: 3
+              time: 1
               value: 1
               inSlope: 1
               outSlope: 1
               tangentMode: 0
+              weightedMode: 0
+              inWeight: 0.33333334
+              outWeight: 0.33333334
             m_PreInfinity: 2
             m_PostInfinity: 2
             m_RotationOrder: 4
@@ -206,17 +200,26 @@ MonoBehaviour:
           m_Range: 1
         green:
           curve:
+            serializedVersion: 2
             m_Curve:
-            - time: 0
+            - serializedVersion: 3
+              time: 0
               value: 0
               inSlope: 1
               outSlope: 1
               tangentMode: 0
-            - time: 1
+              weightedMode: 0
+              inWeight: 0.33333334
+              outWeight: 0.33333334
+            - serializedVersion: 3
+              time: 1
               value: 1
               inSlope: 1
               outSlope: 1
               tangentMode: 0
+              weightedMode: 0
+              inWeight: 0.33333334
+              outWeight: 0.33333334
             m_PreInfinity: 2
             m_PostInfinity: 2
             m_RotationOrder: 4
@@ -225,17 +228,26 @@ MonoBehaviour:
           m_Range: 1
         blue:
           curve:
+            serializedVersion: 2
             m_Curve:
-            - time: 0
+            - serializedVersion: 3
+              time: 0
               value: 0
               inSlope: 1
               outSlope: 1
               tangentMode: 0
-            - time: 1
+              weightedMode: 0
+              inWeight: 0.33333334
+              outWeight: 0.33333334
+            - serializedVersion: 3
+              time: 1
               value: 1
               inSlope: 1
               outSlope: 1
               tangentMode: 0
+              weightedMode: 0
+              inWeight: 0.33333334
+              outWeight: 0.33333334
             m_PreInfinity: 2
             m_PostInfinity: 2
             m_RotationOrder: 4
@@ -244,6 +256,7 @@ MonoBehaviour:
           m_Range: 1
         hueVShue:
           curve:
+            serializedVersion: 2
             m_Curve: []
             m_PreInfinity: 2
             m_PostInfinity: 2
@@ -253,6 +266,7 @@ MonoBehaviour:
           m_Range: 1
         hueVSsat:
           curve:
+            serializedVersion: 2
             m_Curve: []
             m_PreInfinity: 2
             m_PostInfinity: 2
@@ -262,6 +276,7 @@ MonoBehaviour:
           m_Range: 1
         satVSsat:
           curve:
+            serializedVersion: 2
             m_Curve: []
             m_PreInfinity: 2
             m_PostInfinity: 2
@@ -271,6 +286,7 @@ MonoBehaviour:
           m_Range: 1
         lumVSsat:
           curve:
+            serializedVersion: 2
             m_Curve: []
             m_PreInfinity: 2
             m_PostInfinity: 2
@@ -304,11 +320,7 @@ MonoBehaviour:
     m_Enabled: 1
     m_Settings:
       mode: 0
-      color:
-        r: 0
-        g: 0
-        b: 0
-        a: 1
+      color: {r: 0, g: 0, b: 0, a: 1}
       center: {x: 0.5, y: 0.5}
       intensity: 0.318
       smoothness: 0.212
@@ -318,7 +330,6 @@ MonoBehaviour:
       rounded: 0
   dithering:
     m_Enabled: 0
-    m_Settings: {}
   monitors:
     currentMonitorID: 0
     refreshOnPlay: 0
