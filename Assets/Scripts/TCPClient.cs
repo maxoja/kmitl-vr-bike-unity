@@ -45,7 +45,7 @@ public class TCPClient : MonoBehaviour
                 if (i < walker.Length)
                 {
                     walker[i].SetProgress(position);
-                    walker[i].SetSpeed(velocity);
+                    //walker[i].SetSpeed(velocity);
                 }
             }
         }
@@ -107,4 +107,4 @@ public class TCPClient : MonoBehaviour
     {
         closeSocket();
     }
-} // end class s_TCP
+}
