@@ -94,8 +94,14 @@ public class CurveDisplay : MonoBehaviour {
         yield return new WaitForSeconds(1);
         midRing.SetText("Go!           Go!            Go!");
 
-        r = 0;
-        while(true)
+    }
+
+    private IEnumerator TransitToPlaying()
+    {
+        yield return new WaitForSeconds(1);
+
+        float r = 0;
+        while (true)
         {
             r += Time.deltaTime * 4;
             float xz = Mathf.Lerp(1, 2, r);
@@ -115,11 +121,6 @@ public class CurveDisplay : MonoBehaviour {
         midRing.SetRotationOffset(0);
         lowerRing.SetRotationSpeed(0);
         lowerRing.SetRotationOffset(0);
-    }
-
-    private IEnumerator TransitToPlaying()
-    {
-        yield return null;
     }
 
     private IEnumerator TransitToFinished()
