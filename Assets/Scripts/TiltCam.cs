@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class TiltCam : MonoBehaviour {
 
-    public float sensitivity = 4;
-	
+    public float sensitivity;
+
+    void Start()
+    {
+        sensitivity = 4;
+    }
+
     void Update () {
         float changeX = Input.GetAxis("Mouse X");
         float changeY = Input.GetAxis("Mouse Y");
@@ -22,4 +27,9 @@ public class TiltCam : MonoBehaviour {
             transform.parent.Rotate(0,changeX,0, Space.Self);
         }
 	}
+
+    void SetSensitivity(int sensitivity)
+    {
+        this.sensitivity = sensitivity;
+    }
 }

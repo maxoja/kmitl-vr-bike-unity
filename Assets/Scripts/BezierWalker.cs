@@ -4,12 +4,14 @@ using BezierSolution;
 
 public class BezierWalker : MonoBehaviour
 {
+
+    #region Serializable private data field
+
     [SerializeField]
     private BezierSpline spline;
 
     [Range(20, 200), SerializeField]
     private float cacheQuality = 100;
-
 
     [Range(0, 0.15f), SerializeField]
     private float speed = 5f;
@@ -17,29 +19,27 @@ public class BezierWalker : MonoBehaviour
     [Range(0, 1), SerializeField]
     private float progress = 0f;
 
-    public bool tickToCalculateCache = true;
-
     [HideInInspector, SerializeField]
     private float[] cache;
+
+    #endregion 
+
+    public bool tickToCalculateCache;
+
+    void Start()
+    {
+        tickToCalculateCache = true;
+    }
 
     void Update()
     {
         InterpolatePositionAndRotation(progress);
-
         progress += Time.deltaTime * speed;
 
         if (progress > 1)
+        {
             progress = 0;
-    }
-
-    public void SetSpeed(float newSpeed)
-    {
-        this.speed = newSpeed;
-    }
-
-    public void SetProgress(float newProgress)
-    {
-        this.progress = newProgress;
+        }
     }
 
     // helpers
@@ -63,10 +63,22 @@ public class BezierWalker : MonoBehaviour
         return Mathf.Lerp(cache[leftIndex], cache[rightIndex], remainingIndex);
     }
 
+    public void SetSpeed(float newSpeed)
+    {
+        this.speed = newSpeed;
+    }
+
+    public void SetProgress(float newProgress)
+    {
+        this.progress = newProgress;
+    }
+
     private void PrepareCache()
     {
         if (!tickToCalculateCache)
+        {
             return;
+        }
 
         tickToCalculateCache = false;
 
@@ -82,7 +94,6 @@ public class BezierWalker : MonoBehaviour
         while (percent < 1);
 
         cache = list.ToArray();
-        print("calculated with size of " + cache.Length);
     }
 
     //pre processing in edit mode
