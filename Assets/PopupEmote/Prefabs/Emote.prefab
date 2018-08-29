@@ -99,6 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _camera: {fileID: 0}
+  id: 1000
 --- !u!212 &212876500944310536
 SpriteRenderer:
   m_ObjectHideFlags: 1

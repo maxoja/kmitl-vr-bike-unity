@@ -14,7 +14,7 @@ public class CurveDisplay : MonoBehaviour {
     {
         Waiting,
         Launching,
-        Playing,
+        //Playing,
         Finished
     }
 
@@ -23,15 +23,14 @@ public class CurveDisplay : MonoBehaviour {
         startLocalPosition = transform.localPosition;
     }
 
-    private IEnumerator Start()
-    {
-        yield return new WaitForSeconds(2);
-        yield return StartCoroutine(TransitToLaunching());
-        yield return StartCoroutine(TransitToPlaying());
-        yield return new WaitForSeconds(2);
-        SetRank("1st");
-        yield return StartCoroutine(TransitToFinished());
-    }
+    //private IEnumerator Start()
+    //{
+    //    yield return new WaitForSeconds(2);
+    //    yield return StartCoroutine(TransitToLaunching());
+    //    yield return new WaitForSeconds(2);
+    //    SetRank("1st");
+    //    yield return StartCoroutine(TransitToFinished());
+    //}
 
     public void SetRank(string r)
     {
@@ -40,27 +39,44 @@ public class CurveDisplay : MonoBehaviour {
 
     public void ChangeMode(Mode mode)
     {
+        if (gameObject.activeSelf == false)
+            return;
+        
         if (mode == this.currentMode)
             return;
 
         this.currentMode = mode;
         switch(mode)
         {
-            case Mode.Waiting: 
+            case Mode.Waiting:
+                StopAllCoroutines();
+                StartCoroutine(TransitToWaiting());
                 break;
             case Mode.Launching:
                 StopAllCoroutines();
                 StartCoroutine(TransitToLaunching());
-                break;
-            case Mode.Playing:
-                StopAllCoroutines();
-                StartCoroutine(TransitToPlaying());
                 break;
             case Mode.Finished:
                 StopAllCoroutines();
                 StartCoroutine(TransitToFinished());
                 break;
         }
+    }
+
+    private IEnumerator TransitToWaiting()
+    {
+        upperRing.SetText("Waiting for other players...");    
+        midRing.SetText("Waiting players...");    
+        lowerRing.SetText("Waiting for other players...");    
+
+        upperRing.SetRotationSpeed(20);
+        midRing.SetRotationSpeed(40);
+        lowerRing.SetRotationSpeed(60);
+
+        transform.localScale = Vector3.one;
+        alphaController.alpha = 1;
+
+        yield return null;
     }
 
     private IEnumerator TransitToLaunching()
@@ -93,6 +109,8 @@ public class CurveDisplay : MonoBehaviour {
         midRing.SetText("1              1               1");
         yield return new WaitForSeconds(1);
         midRing.SetText("Go!           Go!            Go!");
+
+        yield return StartCoroutine(TransitToPlaying());
 
     }
 
@@ -129,7 +147,7 @@ public class CurveDisplay : MonoBehaviour {
         upperRing.SetText("Finished!");
 
         midRing.SetRotationSpeed(40);
-        midRing.SetText("You are  the " + rank);
+        midRing.SetText("Thanks for Playing!");
 
         lowerRing.SetRotationSpeed(60);
         lowerRing.SetText("Finished!");
@@ -148,6 +166,14 @@ public class CurveDisplay : MonoBehaviour {
 
             yield return null;
         }
-        yield return null;
+
+        while(true){
+            yield return new WaitForSeconds(4);
+            midRing.SetText("You've lost some weight :)");
+
+            yield return new WaitForSeconds(4);
+            midRing.SetText("Thanks for Playing!");
+        }
+
     }
 }

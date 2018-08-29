@@ -1,52 +1,124 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System;
 using System.IO;
 using System.Net.Sockets;
+using UnityEngine.XR;
+
+public class GameData
+{
+    public enum GameState : int
+    {
+        READY = 0,
+        LAUNCHING = 1,
+        PLAYING_NO_WINNER = 2,
+        FIRST_FINISHED = 3,
+        ALL_FINISHED = 4,
+    };
+
+    public static GameState gameState = GameState.READY;
+    public static PlayerData[] players = new PlayerData[3] { new PlayerData(), new PlayerData(), new PlayerData() };
+
+}
+
+public class PlayerData
+{
+    public enum PlayerState : int
+    {
+        READY = 0,
+        RIDING = 1,
+        FINISHED = 2,
+    }
+
+    public PlayerState playerState = PlayerState.READY;
+    public float zPosition = 0;
+    public float zVelocity = 0;
+    public Quaternion headsetRot = Quaternion.identity;
+}
+
 
 public class TCPClient : MonoBehaviour
 {
+    //public Transform camParentTrans;
     internal Boolean socketReady = false;
     TcpClient mySocket;
     NetworkStream theStream;
     StreamWriter theWriter;
     StreamReader theReader;
 
-    public BezierWalker[] walker;
-
+    public bool isMonitor = false;
     bool a = false;
 
     void Start()
     {
+        Cursor.visible = false;
         setupSocket(StaticData.serverIp, int.Parse(StaticData.serverPort));
     }
 
+    float counter = 0;
     void Update()
     {
-        if(!a)
+        if (!a)
         {
             a = true;
             writeSocket("'tagClient', ");
-            writeSocket("'setFrequency',5,"+StaticData.playerId.ToString());
         }
 
+        counter += Time.deltaTime;
+        if (counter >= 0.1f && !isMonitor)
+        {
+#if UNITY_EDITOR
+            Quaternion headRot = FindObjectOfType<VRMouseLook>().transform.localRotation;
+#else
+            Quaternion headRot = InputTracking.GetLocalRotation(XRNode.Head);
+#endif
+            float x = headRot.x;
+            float y = headRot.y;
+            float z = headRot.z;
+            float w = headRot.w;
+
+            writeSocket("'setHeadset'," + x.ToString("F") + "," + y.ToString("F") + "," + z.ToString("F") + "," + w.ToString("F") + "," + StaticData.playerId);
+        }
+
+        if (Input.GetKeyDown("f"))
+        {
+            print("set frequency");
+            writeSocket("'setFrequency', 5.0, 0");
+            writeSocket("'setFrequency', 5.0, 1");
+            writeSocket("'setFrequency', 5.0, 2");
+        }
+
+        if(Input.GetKeyDown("s"))
+        {
+            print("start game");
+            writeSocket("'start',");
+        }
+        if(Input.GetKeyDown("r"))
+        {
+            print("reset game");
+            writeSocket("'reset',");
+        }
+        
         while(theStream.DataAvailable)
         {
             string receivedString = readSocket();
             string[] listA = receivedString.Split(new char[] { '|' });
-            for (int i = 0; i < listA.Length; i++)
-            {
-                string s = listA[i];
-                string[] subList = s.Split(new char[] { ',' });
-                float position = float.Parse(subList[0]);
-                float velocity = float.Parse(subList[1]);
+            GameData.gameState = (GameData.GameState)int.Parse(listA[0]);
 
-                Debug.Log("player:"+i + " pos:" + position + " velo:" + velocity);
-                if (i < walker.Length)
-                {
-                    walker[i].SetProgress(position);
-                    //walker[i].SetSpeed(velocity);
-                }
+            for (int i = 1; i < listA.Length; i++)
+            {
+                string playerString = listA[i];
+                PlayerData playerData = GameData.players[i - 1];
+                string[] dataString = playerString.Split(new char[] { ',' });
+
+                playerData.playerState = (PlayerData.PlayerState)int.Parse(dataString[0]);
+                playerData.zPosition = Mathf.Clamp(float.Parse(dataString[1]),0,1);
+                playerData.zVelocity = float.Parse(dataString[2]);
+                playerData.headsetRot = new Quaternion(
+                    float.Parse(dataString[3]),
+                    float.Parse(dataString[4]),
+                    float.Parse(dataString[5]),
+                    float.Parse(dataString[6])
+                );
             }
         }
         //print(readSocket());
@@ -58,6 +130,7 @@ public class TCPClient : MonoBehaviour
     {
         try
         {
+            print("try connect " + Host + " : " + Port);
             mySocket = new TcpClient(Host, Port);
             theStream = mySocket.GetStream();
             theWriter = new StreamWriter(theStream);

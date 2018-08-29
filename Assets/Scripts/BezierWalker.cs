@@ -11,30 +11,39 @@ public class BezierWalker : MonoBehaviour
     private float cacheQuality = 100;
 
 
-    [Range(0, 0.15f), SerializeField]
-    private float speed = 5f;
+    //[Range(0, 0.15f), SerializeField]
+    //private float speed = 5f;
 
     [Range(0, 1), SerializeField]
     private float progress = 0f;
 
-    public bool tickToCalculateCache = true;
+    private bool tickToCalculateCache = true;
 
-    [HideInInspector, SerializeField]
-    private float[] cache;
+    //[HideInInspector, SerializeField]
+     private float[] cache;
+
+    private void Start()
+    {
+        tickToCalculateCache = true;
+        PrepareCache();
+    }
 
     void Update()
     {
         InterpolatePositionAndRotation(progress);
 
-        progress += Time.deltaTime * speed;
-
-        if (progress > 1)
+        if(progress > 1)
             progress = 0;
+    }
+
+    public float GetProgress()
+    {
+        return progress;
     }
 
     public void SetSpeed(float newSpeed)
     {
-        this.speed = newSpeed;
+        //this.speed = newSpeed;
     }
 
     public void SetProgress(float newProgress)
@@ -46,12 +55,29 @@ public class BezierWalker : MonoBehaviour
     private void InterpolatePositionAndRotation(float percent)
     {
         float normalizedT = MapPercentToBeziereRatio(progress);
-        transform.position = spline.GetPoint(normalizedT);
-        transform.rotation = Quaternion.LookRotation(spline.GetTangent(normalizedT));
+        Vector3 resultPosition = spline.GetPoint(normalizedT);
+
+        //do raycast and lerp y
+        Ray ray = new Ray(transform.position + Vector3.up*3, Vector3.down);
+        RaycastHit hit;
+          
+        //if the ray has hit something  
+        if(Physics.Raycast(ray.origin,ray.direction, out hit, 10))//cast the ray 5 units at the specified direction    
+        {
+            float hitY = hit.point.y;
+            float posY = transform.position.y;
+            float properY = Mathf.Lerp(posY, hitY, Time.deltaTime*10);
+            resultPosition.y = properY;
+        }
+
+        transform.position = resultPosition;
+        transform.rotation = Quaternion.Lerp(transform.rotation,Quaternion.LookRotation(spline.GetTangent(normalizedT)), Time.deltaTime*5);
     }
 
     private float MapPercentToBeziereRatio(float percent)
     {
+        if (percent >= 1)
+            return 1f;
         PrepareCache();
         percent = Mathf.Clamp(percent, 0, 1);
 
