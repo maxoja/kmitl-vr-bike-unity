@@ -1,5 +1,6 @@
 # VR Bike Game/Inspector Client
-This module is a part of VR-Bike-Multiplayer where you can find more details there.
+This module is a part of [VR-Bike-Multiplayer](https://github.com/maxoja/kmitl-vr-bike) where you can find more details there.
+###### latest update : 29 Aug 2018
 
 ### Small Guides
 - To build as VR game client, build only 'Menu' and 'Game' scenes
