@@ -1,0 +1,877 @@
+fileFormatVersion: 2
+guid: c6d7f4b58abbd8347ac5cc692ed1a13b
+timeCreated: 1478412341
+licenseType: Store
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: CuteLowPolyPerson_Body
+    100002: ElbowPole.L
+    100004: ElbowPole.L_end
+    100006: ElbowPole.R
+    100008: ElbowPole.R_end
+    100010: Foot.L
+    100012: Foot.L_end
+    100014: Foot.R
+    100016: Foot.R_end
+    100018: FootIK.L
+    100020: FootIK.L_end
+    100022: FootIK.R
+    100024: FootIK.R_end
+    100026: Hand.L
+    100028: Hand.L_end
+    100030: Hand.R
+    100032: Hand.R_end
+    100034: HandIK.L
+    100036: HandIK.L_end
+    100038: HandIK.R
+    100040: HandIK.R_end
+    100042: Head
+    100044: Head_end
+    100046: Hips
+    100048: KneePole.L
+    100050: KneePole.L_end
+    100052: KneePole.R
+    100054: KneePole.R_end
+    100056: //RootNode
+    100058: Low_Poly_Skeleton
+    100060: LowerArm.L
+    100062: LowerArm.R
+    100064: LowerLeg.L
+    100066: LowerLeg.R
+    100068: Neck
+    100070: RootBone
+    100072: Shoulder.L
+    100074: Shoulder.R
+    100076: Spine
+    100078: Spine.02
+    100080: UpperArm.L
+    100082: UpperArm.R
+    100084: UpperLeg.L
+    100086: UpperLeg.R
+    400000: CuteLowPolyPerson_Body
+    400002: ElbowPole.L
+    400004: ElbowPole.L_end
+    400006: ElbowPole.R
+    400008: ElbowPole.R_end
+    400010: Foot.L
+    400012: Foot.L_end
+    400014: Foot.R
+    400016: Foot.R_end
+    400018: FootIK.L
+    400020: FootIK.L_end
+    400022: FootIK.R
+    400024: FootIK.R_end
+    400026: Hand.L
+    400028: Hand.L_end
+    400030: Hand.R
+    400032: Hand.R_end
+    400034: HandIK.L
+    400036: HandIK.L_end
+    400038: HandIK.R
+    400040: HandIK.R_end
+    400042: Head
+    400044: Head_end
+    400046: Hips
+    400048: KneePole.L
+    400050: KneePole.L_end
+    400052: KneePole.R
+    400054: KneePole.R_end
+    400056: //RootNode
+    400058: Low_Poly_Skeleton
+    400060: LowerArm.L
+    400062: LowerArm.R
+    400064: LowerLeg.L
+    400066: LowerLeg.R
+    400068: Neck
+    400070: RootBone
+    400072: Shoulder.L
+    400074: Shoulder.R
+    400076: Spine
+    400078: Spine.02
+    400080: UpperArm.L
+    400082: UpperArm.R
+    400084: UpperLeg.L
+    400086: UpperLeg.R
+    4300000: CuteLowPolyPerson_Body
+    7400000: Low_Poly_Skeleton|00_T_Pose
+    7400002: Low_Poly_Skeleton|01_Idle
+    7400004: Low_Poly_Skeleton|02_Walk
+    9500000: //RootNode
+    13700000: CuteLowPolyPerson_Body
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 3
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Low_Poly_Skeleton|00_T_Pose
+      takeName: Low_Poly_Skeleton|00_T_Pose
+      firstFrame: 0
+      lastFrame: 1
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 1
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: CuteLowPolyPerson_Body
+        weight: 0
+      - path: Low_Poly_Skeleton
+        weight: 1
+      - path: Low_Poly_Skeleton/RootBone
+        weight: 1
+      - path: Low_Poly_Skeleton/RootBone/ElbowPole.L
+        weight: 0
+      - path: Low_Poly_Skeleton/RootBone/ElbowPole.L/ElbowPole.L_end
+        weight: 0
+      - path: Low_Poly_Skeleton/RootBone/ElbowPole.R
+        weight: 0
+      - path: Low_Poly_Skeleton/RootBone/ElbowPole.R/ElbowPole.R_end
+        weight: 0
+      - path: Low_Poly_Skeleton/RootBone/FootIK.L
+        weight: 0
+      - path: Low_Poly_Skeleton/RootBone/FootIK.L/FootIK.L_end
+        weight: 0
+      - path: Low_Poly_Skeleton/RootBone/FootIK.R
+        weight: 0
+      - path: Low_Poly_Skeleton/RootBone/FootIK.R/FootIK.R_end
+        weight: 0
+      - path: Low_Poly_Skeleton/RootBone/HandIK.L
+        weight: 0
+      - path: Low_Poly_Skeleton/RootBone/HandIK.L/HandIK.L_end
+        weight: 0
+      - path: Low_Poly_Skeleton/RootBone/HandIK.R
+        weight: 0
+      - path: Low_Poly_Skeleton/RootBone/HandIK.R/HandIK.R_end
+        weight: 0
+      - path: Low_Poly_Skeleton/RootBone/Hips
+        weight: 1
+      - path: Low_Poly_Skeleton/RootBone/Hips/Spine
+        weight: 1
+      - path: Low_Poly_Skeleton/RootBone/Hips/Spine/Spine.02
+        weight: 1
+      - path: Low_Poly_Skeleton/RootBone/Hips/Spine/Spine.02/Neck
+        weight: 1
+      - path: Low_Poly_Skeleton/RootBone/Hips/Spine/Spine.02/Neck/Head
+        weight: 1
+      - path: Low_Poly_Skeleton/RootBone/Hips/Spine/Spine.02/Neck/Head/Head_end
+        weight: 0
+      - path: Low_Poly_Skeleton/RootBone/Hips/Spine/Spine.02/Shoulder.L
+        weight: 1
+      - path: Low_Poly_Skeleton/RootBone/Hips/Spine/Spine.02/Shoulder.L/UpperArm.L
+        weight: 1
+      - path: Low_Poly_Skeleton/RootBone/Hips/Spine/Spine.02/Shoulder.L/UpperArm.L/LowerArm.L
+        weight: 1
+      - path: Low_Poly_Skeleton/RootBone/Hips/Spine/Spine.02/Shoulder.L/UpperArm.L/LowerArm.L/Hand.L
+        weight: 1
+      - path: Low_Poly_Skeleton/RootBone/Hips/Spine/Spine.02/Shoulder.L/UpperArm.L/LowerArm.L/Hand.L/Hand.L_end
+        weight: 0
+      - path: Low_Poly_Skeleton/RootBone/Hips/Spine/Spine.02/Shoulder.R
+        weight: 1
+      - path: Low_Poly_Skeleton/RootBone/Hips/Spine/Spine.02/Shoulder.R/UpperArm.R
+        weight: 1
+      - path: Low_Poly_Skeleton/RootBone/Hips/Spine/Spine.02/Shoulder.R/UpperArm.R/LowerArm.R
+        weight: 1
+      - path: Low_Poly_Skeleton/RootBone/Hips/Spine/Spine.02/Shoulder.R/UpperArm.R/LowerArm.R/Hand.R
+        weight: 1
+      - path: Low_Poly_Skeleton/RootBone/Hips/Spine/Spine.02/Shoulder.R/UpperArm.R/LowerArm.R/Hand.R/Hand.R_end
+        weight: 0
+      - path: Low_Poly_Skeleton/RootBone/Hips/UpperLeg.L
+        weight: 1
+      - path: Low_Poly_Skeleton/RootBone/Hips/UpperLeg.L/LowerLeg.L
+        weight: 1
+      - path: Low_Poly_Skeleton/RootBone/Hips/UpperLeg.L/LowerLeg.L/Foot.L
+        weight: 1
+      - path: Low_Poly_Skeleton/RootBone/Hips/UpperLeg.L/LowerLeg.L/Foot.L/Foot.L_end
+        weight: 0
+      - path: Low_Poly_Skeleton/RootBone/Hips/UpperLeg.R
+        weight: 1
+      - path: Low_Poly_Skeleton/RootBone/Hips/UpperLeg.R/LowerLeg.R
+        weight: 1
+      - path: Low_Poly_Skeleton/RootBone/Hips/UpperLeg.R/LowerLeg.R/Foot.R
+        weight: 1
+      - path: Low_Poly_Skeleton/RootBone/Hips/UpperLeg.R/LowerLeg.R/Foot.R/Foot.R_end
+        weight: 0
+      - path: Low_Poly_Skeleton/RootBone/KneePole.L
+        weight: 0
+      - path: Low_Poly_Skeleton/RootBone/KneePole.L/KneePole.L_end
+        weight: 0
+      - path: Low_Poly_Skeleton/RootBone/KneePole.R
+        weight: 0
+      - path: Low_Poly_Skeleton/RootBone/KneePole.R/KneePole.R_end
+        weight: 0
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Low_Poly_Skeleton|01_Idle
+      takeName: Low_Poly_Skeleton|01_Idle
+      firstFrame: 0
+      lastFrame: 120
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 1
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: CuteLowPolyPerson_Body
+        weight: 0
+      - path: Low_Poly_Skeleton
+        weight: 1
+      - path: Low_Poly_Skeleton/RootBone
+        weight: 1
+      - path: Low_Poly_Skeleton/RootBone/ElbowPole.L
+        weight: 0
+      - path: Low_Poly_Skeleton/RootBone/ElbowPole.L/ElbowPole.L_end
+        weight: 0
+      - path: Low_Poly_Skeleton/RootBone/ElbowPole.R
+        weight: 0
+      - path: Low_Poly_Skeleton/RootBone/ElbowPole.R/ElbowPole.R_end
+        weight: 0
+      - path: Low_Poly_Skeleton/RootBone/FootIK.L
+        weight: 0
+      - path: Low_Poly_Skeleton/RootBone/FootIK.L/FootIK.L_end
+        weight: 0
+      - path: Low_Poly_Skeleton/RootBone/FootIK.R
+        weight: 0
+      - path: Low_Poly_Skeleton/RootBone/FootIK.R/FootIK.R_end
+        weight: 0
+      - path: Low_Poly_Skeleton/RootBone/HandIK.L
+        weight: 0
+      - path: Low_Poly_Skeleton/RootBone/HandIK.L/HandIK.L_end
+        weight: 0
+      - path: Low_Poly_Skeleton/RootBone/HandIK.R
+        weight: 0
+      - path: Low_Poly_Skeleton/RootBone/HandIK.R/HandIK.R_end
+        weight: 0
+      - path: Low_Poly_Skeleton/RootBone/Hips
+        weight: 1
+      - path: Low_Poly_Skeleton/RootBone/Hips/Spine
+        weight: 1
+      - path: Low_Poly_Skeleton/RootBone/Hips/Spine/Spine.02
+        weight: 1
+      - path: Low_Poly_Skeleton/RootBone/Hips/Spine/Spine.02/Neck
+        weight: 1
+      - path: Low_Poly_Skeleton/RootBone/Hips/Spine/Spine.02/Neck/Head
+        weight: 1
+      - path: Low_Poly_Skeleton/RootBone/Hips/Spine/Spine.02/Neck/Head/Head_end
+        weight: 0
+      - path: Low_Poly_Skeleton/RootBone/Hips/Spine/Spine.02/Shoulder.L
+        weight: 1
+      - path: Low_Poly_Skeleton/RootBone/Hips/Spine/Spine.02/Shoulder.L/UpperArm.L
+        weight: 1
+      - path: Low_Poly_Skeleton/RootBone/Hips/Spine/Spine.02/Shoulder.L/UpperArm.L/LowerArm.L
+        weight: 1
+      - path: Low_Poly_Skeleton/RootBone/Hips/Spine/Spine.02/Shoulder.L/UpperArm.L/LowerArm.L/Hand.L
+        weight: 1
+      - path: Low_Poly_Skeleton/RootBone/Hips/Spine/Spine.02/Shoulder.L/UpperArm.L/LowerArm.L/Hand.L/Hand.L_end
+        weight: 0
+      - path: Low_Poly_Skeleton/RootBone/Hips/Spine/Spine.02/Shoulder.R
+        weight: 1
+      - path: Low_Poly_Skeleton/RootBone/Hips/Spine/Spine.02/Shoulder.R/UpperArm.R
+        weight: 1
+      - path: Low_Poly_Skeleton/RootBone/Hips/Spine/Spine.02/Shoulder.R/UpperArm.R/LowerArm.R
+        weight: 1
+      - path: Low_Poly_Skeleton/RootBone/Hips/Spine/Spine.02/Shoulder.R/UpperArm.R/LowerArm.R/Hand.R
+        weight: 1
+      - path: Low_Poly_Skeleton/RootBone/Hips/Spine/Spine.02/Shoulder.R/UpperArm.R/LowerArm.R/Hand.R/Hand.R_end
+        weight: 0
+      - path: Low_Poly_Skeleton/RootBone/Hips/UpperLeg.L
+        weight: 1
+      - path: Low_Poly_Skeleton/RootBone/Hips/UpperLeg.L/LowerLeg.L
+        weight: 1
+      - path: Low_Poly_Skeleton/RootBone/Hips/UpperLeg.L/LowerLeg.L/Foot.L
+        weight: 1
+      - path: Low_Poly_Skeleton/RootBone/Hips/UpperLeg.L/LowerLeg.L/Foot.L/Foot.L_end
+        weight: 0
+      - path: Low_Poly_Skeleton/RootBone/Hips/UpperLeg.R
+        weight: 1
+      - path: Low_Poly_Skeleton/RootBone/Hips/UpperLeg.R/LowerLeg.R
+        weight: 1
+      - path: Low_Poly_Skeleton/RootBone/Hips/UpperLeg.R/LowerLeg.R/Foot.R
+        weight: 1
+      - path: Low_Poly_Skeleton/RootBone/Hips/UpperLeg.R/LowerLeg.R/Foot.R/Foot.R_end
+        weight: 0
+      - path: Low_Poly_Skeleton/RootBone/KneePole.L
+        weight: 0
+      - path: Low_Poly_Skeleton/RootBone/KneePole.L/KneePole.L_end
+        weight: 0
+      - path: Low_Poly_Skeleton/RootBone/KneePole.R
+        weight: 0
+      - path: Low_Poly_Skeleton/RootBone/KneePole.R/KneePole.R_end
+        weight: 0
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Low_Poly_Skeleton|02_Walk
+      takeName: Low_Poly_Skeleton|02_Walk
+      firstFrame: 0
+      lastFrame: 30
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 1
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: CuteLowPolyPerson_Body
+        weight: 0
+      - path: Low_Poly_Skeleton
+        weight: 1
+      - path: Low_Poly_Skeleton/RootBone
+        weight: 1
+      - path: Low_Poly_Skeleton/RootBone/ElbowPole.L
+        weight: 0
+      - path: Low_Poly_Skeleton/RootBone/ElbowPole.L/ElbowPole.L_end
+        weight: 0
+      - path: Low_Poly_Skeleton/RootBone/ElbowPole.R
+        weight: 0
+      - path: Low_Poly_Skeleton/RootBone/ElbowPole.R/ElbowPole.R_end
+        weight: 0
+      - path: Low_Poly_Skeleton/RootBone/FootIK.L
+        weight: 0
+      - path: Low_Poly_Skeleton/RootBone/FootIK.L/FootIK.L_end
+        weight: 0
+      - path: Low_Poly_Skeleton/RootBone/FootIK.R
+        weight: 0
+      - path: Low_Poly_Skeleton/RootBone/FootIK.R/FootIK.R_end
+        weight: 0
+      - path: Low_Poly_Skeleton/RootBone/HandIK.L
+        weight: 0
+      - path: Low_Poly_Skeleton/RootBone/HandIK.L/HandIK.L_end
+        weight: 0
+      - path: Low_Poly_Skeleton/RootBone/HandIK.R
+        weight: 0
+      - path: Low_Poly_Skeleton/RootBone/HandIK.R/HandIK.R_end
+        weight: 0
+      - path: Low_Poly_Skeleton/RootBone/Hips
+        weight: 1
+      - path: Low_Poly_Skeleton/RootBone/Hips/Spine
+        weight: 1
+      - path: Low_Poly_Skeleton/RootBone/Hips/Spine/Spine.02
+        weight: 1
+      - path: Low_Poly_Skeleton/RootBone/Hips/Spine/Spine.02/Neck
+        weight: 1
+      - path: Low_Poly_Skeleton/RootBone/Hips/Spine/Spine.02/Neck/Head
+        weight: 1
+      - path: Low_Poly_Skeleton/RootBone/Hips/Spine/Spine.02/Neck/Head/Head_end
+        weight: 0
+      - path: Low_Poly_Skeleton/RootBone/Hips/Spine/Spine.02/Shoulder.L
+        weight: 1
+      - path: Low_Poly_Skeleton/RootBone/Hips/Spine/Spine.02/Shoulder.L/UpperArm.L
+        weight: 1
+      - path: Low_Poly_Skeleton/RootBone/Hips/Spine/Spine.02/Shoulder.L/UpperArm.L/LowerArm.L
+        weight: 1
+      - path: Low_Poly_Skeleton/RootBone/Hips/Spine/Spine.02/Shoulder.L/UpperArm.L/LowerArm.L/Hand.L
+        weight: 1
+      - path: Low_Poly_Skeleton/RootBone/Hips/Spine/Spine.02/Shoulder.L/UpperArm.L/LowerArm.L/Hand.L/Hand.L_end
+        weight: 0
+      - path: Low_Poly_Skeleton/RootBone/Hips/Spine/Spine.02/Shoulder.R
+        weight: 1
+      - path: Low_Poly_Skeleton/RootBone/Hips/Spine/Spine.02/Shoulder.R/UpperArm.R
+        weight: 1
+      - path: Low_Poly_Skeleton/RootBone/Hips/Spine/Spine.02/Shoulder.R/UpperArm.R/LowerArm.R
+        weight: 1
+      - path: Low_Poly_Skeleton/RootBone/Hips/Spine/Spine.02/Shoulder.R/UpperArm.R/LowerArm.R/Hand.R
+        weight: 1
+      - path: Low_Poly_Skeleton/RootBone/Hips/Spine/Spine.02/Shoulder.R/UpperArm.R/LowerArm.R/Hand.R/Hand.R_end
+        weight: 0
+      - path: Low_Poly_Skeleton/RootBone/Hips/UpperLeg.L
+        weight: 1
+      - path: Low_Poly_Skeleton/RootBone/Hips/UpperLeg.L/LowerLeg.L
+        weight: 1
+      - path: Low_Poly_Skeleton/RootBone/Hips/UpperLeg.L/LowerLeg.L/Foot.L
+        weight: 1
+      - path: Low_Poly_Skeleton/RootBone/Hips/UpperLeg.L/LowerLeg.L/Foot.L/Foot.L_end
+        weight: 0
+      - path: Low_Poly_Skeleton/RootBone/Hips/UpperLeg.R
+        weight: 1
+      - path: Low_Poly_Skeleton/RootBone/Hips/UpperLeg.R/LowerLeg.R
+        weight: 1
+      - path: Low_Poly_Skeleton/RootBone/Hips/UpperLeg.R/LowerLeg.R/Foot.R
+        weight: 1
+      - path: Low_Poly_Skeleton/RootBone/Hips/UpperLeg.R/LowerLeg.R/Foot.R/Foot.R_end
+        weight: 0
+      - path: Low_Poly_Skeleton/RootBone/KneePole.L
+        weight: 0
+      - path: Low_Poly_Skeleton/RootBone/KneePole.L/KneePole.L_end
+        weight: 0
+      - path: Low_Poly_Skeleton/RootBone/KneePole.R
+        weight: 0
+      - path: Low_Poly_Skeleton/RootBone/KneePole.R/KneePole.R_end
+        weight: 0
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human:
+    - boneName: Hips
+      humanName: Hips
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: UpperLeg.L
+      humanName: LeftUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: UpperLeg.R
+      humanName: RightUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: LowerLeg.L
+      humanName: LeftLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: LowerLeg.R
+      humanName: RightLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Foot.L
+      humanName: LeftFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Foot.R
+      humanName: RightFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Spine
+      humanName: Spine
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Spine.02
+      humanName: Chest
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Head
+      humanName: Head
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Shoulder.L
+      humanName: LeftShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Shoulder.R
+      humanName: RightShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: UpperArm.L
+      humanName: LeftUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: UpperArm.R
+      humanName: RightUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: LowerArm.L
+      humanName: LeftLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: LowerArm.R
+      humanName: RightLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Hand.L
+      humanName: LeftHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Hand.R
+      humanName: RightHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    skeleton:
+    - name: Low_Poly_Male_01(Clone)
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: CuteLowPolyPerson_Body
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 100, y: 100, z: 100}
+      transformModified: 1
+    - name: Low_Poly_Skeleton
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 100, y: 100, z: 100}
+      transformModified: 1
+    - name: RootBone
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Hips
+      position: {x: -0, y: 0.0022310305, z: 0}
+      rotation: {x: 0, y: -0.00000011920928, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Spine
+      position: {x: -0, y: 0.0007391077, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Spine.02
+      position: {x: -0, y: 0.0007391077, z: 0}
+      rotation: {x: 0, y: -7.1054274e-15, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Shoulder.L
+      position: {x: -0.0003339194, y: 0.00035605757, z: 1.2745208e-10}
+      rotation: {x: 0.00000019848083, y: -0.00000013662616, z: 0.59336317, w: 0.80493486}
+      scale: {x: 0.99999994, y: 0.99999994, z: 1}
+      transformModified: 1
+    - name: UpperArm.L
+      position: {x: -0.00040780625, y: 0.001747852, z: 8.111892e-10}
+      rotation: {x: 0.080269866, y: -0.6997781, z: 0.13490956, w: 0.696898}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: LowerArm.L
+      position: {x: -5.820766e-11, y: 0.00091523555, z: -3.899913e-11}
+      rotation: {x: -0.0019440951, y: 0.00037941342, z: -0.074318476, w: 0.9972326}
+      scale: {x: 1, y: 1.0000001, z: 0.99999994}
+      transformModified: 1
+    - name: Hand.L
+      position: {x: 9.6624715e-11, y: 0.0010378131, z: -3.0039699e-10}
+      rotation: {x: 0.54353756, y: -0.45716098, z: -0.44600222, w: 0.5446585}
+      scale: {x: 0.9999999, y: 1.0000002, z: 0.99999994}
+      transformModified: 1
+    - name: Hand.L_end
+      position: {x: -0, y: 0.0005291217, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Neck
+      position: {x: -0, y: 0.0007391083, z: 0}
+      rotation: {x: 0, y: 0.00000011920928, z: -0, w: 1}
+      scale: {x: 1, y: 0.99999994, z: 1}
+      transformModified: 1
+    - name: Head
+      position: {x: -0, y: 0.000502097, z: 0}
+      rotation: {x: 0, y: 7.1054274e-15, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Head_end
+      position: {x: -0, y: 0.003296466, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Shoulder.R
+      position: {x: 0.0003339194, y: 0.00035605728, z: -3.1773105e-11}
+      rotation: {x: -0.00000022121826, y: -0.000000048899533, z: -0.59336317, w: 0.80493486}
+      scale: {x: 0.99999994, y: 0.99999994, z: 1}
+      transformModified: 1
+    - name: UpperArm.R
+      position: {x: 0.0004078062, y: 0.0017478516, z: 4.2874573e-10}
+      rotation: {x: -0.13490947, y: -0.6968978, z: -0.080269955, w: 0.69977826}
+      scale: {x: 1.0000002, y: 1.0000005, z: 1.0000001}
+      transformModified: 1
+    - name: LowerArm.R
+      position: {x: 4.1909514e-11, y: 0.0009152348, z: -4.3510227e-11}
+      rotation: {x: 0.0019443784, y: -0.00037956244, z: -0.074318275, w: 0.9972326}
+      scale: {x: 0.9999999, y: 1.0000002, z: 1.0000001}
+      transformModified: 1
+    - name: Hand.R
+      position: {x: -4.1909514e-11, y: 0.0010378131, z: 2.1388587e-10}
+      rotation: {x: 0.44600216, y: 0.54465836, z: -0.54353744, w: -0.45716122}
+      scale: {x: 0.9999996, y: 1.0000004, z: 0.99999994}
+      transformModified: 1
+    - name: Hand.R_end
+      position: {x: -0, y: 0.0005291219, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: UpperLeg.L
+      position: {x: -0.0007704129, y: -0.00013092712, z: 0.00002306089}
+      rotation: {x: 0.99870235, y: -0.000000012518174, z: -0.00000010148779, w: 0.05092796}
+      scale: {x: 1, y: 0.99999994, z: 0.99999595}
+      transformModified: 1
+    - name: LowerLeg.L
+      position: {x: 3.9393808e-11, y: 0.0009823462, z: 2.0994852e-11}
+      rotation: {x: 0.10535323, y: -0.0000000012775574, z: -0.000000037177234, w: 0.9944349}
+      scale: {x: 1, y: 1, z: 1.0000002}
+      transformModified: 1
+    - name: Foot.L
+      position: {x: 1.12145545e-11, y: 0.00086618296, z: -2.7357782e-12}
+      rotation: {x: 0.00000040308143, y: 0.76015717, z: -0.64973927, w: -0.0000005197029}
+      scale: {x: 1, y: 0.9999996, z: 0.9999999}
+      transformModified: 1
+    - name: Foot.L_end
+      position: {x: -0, y: 0.0006538531, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: UpperLeg.R
+      position: {x: 0.0007704127, y: -0.00013092726, z: 0.00002306052}
+      rotation: {x: 0.99870235, y: -0.000000070971794, z: -0.00000015165519, w: 0.050928626}
+      scale: {x: 1, y: 0.99999994, z: 0.99999595}
+      transformModified: 1
+    - name: LowerLeg.R
+      position: {x: 3.9967113e-11, y: 0.000982346, z: -3.3568702e-13}
+      rotation: {x: 0.10535284, y: 0.00000036441585, z: -0.00000012818072, w: 0.9944349}
+      scale: {x: 1, y: 1, z: 1.0000002}
+      transformModified: 1
+    - name: Foot.R
+      position: {x: 1.1900429e-10, y: 0.00086618285, z: -2.7258196e-12}
+      rotation: {x: 0.0000007090767, y: 0.7601574, z: -0.64973897, w: -0.0000004309064}
+      scale: {x: 1, y: 0.9999996, z: 0.9999998}
+      transformModified: 1
+    - name: Foot.R_end
+      position: {x: -0, y: 0.0006538531, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: HandIK.L
+      position: {x: -0.004041034, y: 0.0041677007, z: 0.000009410044}
+      rotation: {x: 1, y: -2.6765506e-24, z: 0.00000004371139, w: 6.123234e-17}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: HandIK.L_end
+      position: {x: -0, y: 0.0005291217, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: FootIK.L
+      position: {x: -0.0007704129, y: 0.0002618291, z: 0.000028595081}
+      rotation: {x: -0.0000005443256, y: 0.6072886, z: 0.79448134, w: -0.00000042194517}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: FootIK.L_end
+      position: {x: -0, y: 0.0006538531, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: KneePole.L
+      position: {x: -0.0007704129, y: 0.0011228531, z: 0.0021212336}
+      rotation: {x: -0.00000009415697, y: 0.7071068, z: 0.7071067, w: -0.00000009415696}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: KneePole.L_end
+      position: {x: -0, y: 0.000417552, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: HandIK.R
+      position: {x: 0.004041034, y: 0.0041677, z: 0.00000941038}
+      rotation: {x: 1, y: -2.6765506e-24, z: 0.00000004371139, w: 6.123234e-17}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: HandIK.R_end
+      position: {x: -0, y: 0.0005291219, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: FootIK.R
+      position: {x: 0.0007704127, y: 0.0002618291, z: 0.00002859508}
+      rotation: {x: -0.0000007557601, y: 0.6072886, z: 0.79448134, w: -0.0000005955356}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: FootIK.R_end
+      position: {x: -0, y: 0.0006538531, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: KneePole.R
+      position: {x: 0.0007704129, y: 0.0011228531, z: 0.0021212336}
+      rotation: {x: -0.00000009415697, y: 0.7071068, z: 0.7071067, w: -0.00000009415696}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: KneePole.R_end
+      position: {x: -0, y: 0.000417552, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: ElbowPole.L
+      position: {x: -0.0030086492, y: 0.0041597453, z: -0.0024217037}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: ElbowPole.L_end
+      position: {x: -0, y: 0.0003068417, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: ElbowPole.R
+      position: {x: 0.0030086492, y: 0.0041597453, z: -0.0024217037}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: ElbowPole.R_end
+      position: {x: -0, y: 0.0003068417, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 3
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

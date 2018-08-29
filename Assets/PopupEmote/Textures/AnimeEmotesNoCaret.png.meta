@@ -1,0 +1,588 @@
+fileFormatVersion: 2
+guid: d6b3873ad6f0e0446819b2a24cee2e92
+timeCreated: 1489529337
+licenseType: Store
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: NoCaret_Duh
+    21300002: NoCaret_Gasp
+    21300004: NoCaret_Rage
+    21300006: NoCaret_Evil
+    21300008: NoCaret_Hermph
+    21300010: NoCaret_Angry
+    21300012: NoCaret_Sullen
+    21300014: NoCaret_Heh
+    21300016: NoCaret_Shock
+    21300018: NoCaret_Laugh
+    21300020: NoCaret_Dizzy
+    21300022: NoCaret_Zombie
+    21300024: NoCaret_Love
+    21300026: NoCaret_Stars
+    21300028: NoCaret_Poker
+    21300030: NoCaret_Cute
+    21300032: NoCaret_Dead
+    21300034: Tongue
+    21300036: NoCaret_Embarassed
+    21300038: NoCaret_Happy
+    21300040: NoCaret_Frog
+    21300042: NoCaret_Teeth
+    21300044: NoCaret_Puke
+    21300046: NoCaret_Sick
+    21300048: NoCaret_Rainbows
+    21300050: NoCaret_Sneaky
+    21300052: NoCaret_Scribbles
+    21300054: NoCaret_Asleep
+    21300056: NoCaret_Yawn
+    21300058: NoCaret_Cry
+    21300060: NoCaret_Glance
+    21300062: NoCaret_Wink
+    21300064: NoCaret_Cool
+    21300066: NoCaret_Tear
+    21300068: NoCaret_Skull
+    21300070: NoCaret_Smart
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: -1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: WebGL
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: NoCaret_Duh
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2415
+        width: 512
+        height: 483
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: NoCaret_Gasp
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 2415
+        width: 512
+        height: 483
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: NoCaret_Rage
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 2415
+        width: 512
+        height: 483
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: NoCaret_Evil
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 2415
+        width: 512
+        height: 483
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: NoCaret_Hermph
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 2415
+        width: 512
+        height: 483
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: NoCaret_Angry
+      rect:
+        serializedVersion: 2
+        x: 2560
+        y: 2415
+        width: 512
+        height: 483
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: NoCaret_Sullen
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1932
+        width: 512
+        height: 483
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: NoCaret_Heh
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 1932
+        width: 512
+        height: 483
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: NoCaret_Shock
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 1932
+        width: 512
+        height: 483
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: NoCaret_Laugh
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 1932
+        width: 512
+        height: 483
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: NoCaret_Dizzy
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 1932
+        width: 512
+        height: 483
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: NoCaret_Zombie
+      rect:
+        serializedVersion: 2
+        x: 2560
+        y: 1932
+        width: 512
+        height: 483
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: NoCaret_Love
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1449
+        width: 512
+        height: 483
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: NoCaret_Stars
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 1449
+        width: 512
+        height: 483
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: NoCaret_Poker
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 1449
+        width: 512
+        height: 483
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: NoCaret_Cute
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 1449
+        width: 512
+        height: 483
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: NoCaret_Dead
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 1449
+        width: 512
+        height: 483
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Tongue
+      rect:
+        serializedVersion: 2
+        x: 2560
+        y: 1449
+        width: 512
+        height: 483
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: NoCaret_Embarassed
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 966
+        width: 512
+        height: 483
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: NoCaret_Happy
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 966
+        width: 512
+        height: 483
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: NoCaret_Frog
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 966
+        width: 512
+        height: 483
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: NoCaret_Teeth
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 966
+        width: 512
+        height: 483
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: NoCaret_Puke
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 966
+        width: 512
+        height: 483
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: NoCaret_Sick
+      rect:
+        serializedVersion: 2
+        x: 2560
+        y: 966
+        width: 512
+        height: 483
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: NoCaret_Rainbows
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 483
+        width: 512
+        height: 483
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: NoCaret_Sneaky
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 483
+        width: 512
+        height: 483
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: NoCaret_Scribbles
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 483
+        width: 512
+        height: 483
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: NoCaret_Asleep
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 483
+        width: 512
+        height: 483
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: NoCaret_Yawn
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 483
+        width: 512
+        height: 483
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: NoCaret_Cry
+      rect:
+        serializedVersion: 2
+        x: 2560
+        y: 483
+        width: 512
+        height: 483
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: NoCaret_Glance
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 512
+        height: 483
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: NoCaret_Wink
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 0
+        width: 512
+        height: 483
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: NoCaret_Cool
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 0
+        width: 512
+        height: 483
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: NoCaret_Tear
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 0
+        width: 512
+        height: 483
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: NoCaret_Skull
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 0
+        width: 512
+        height: 483
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: NoCaret_Smart
+      rect:
+        serializedVersion: 2
+        x: 2560
+        y: 0
+        width: 512
+        height: 483
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
