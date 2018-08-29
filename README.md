@@ -18,4 +18,4 @@ This module is a part of [VR-Bike-Multiplayer](https://github.com/maxoja/kmitl-v
 - [Low Poly Trees - Pack](https://assetstore.unity.com/packages/3d/vegetation/trees/low-poly-trees-pack-73954)
 - [Low Poly Vegetation Pack](https://assetstore.unity.com/packages/3d/vegetation/low-poly-vegetation-pack-80146)
 - [Bezier Solution](https://assetstore.unity.com/packages/tools/level-design/bezier-solution-113074)
-- [Prefab painter - finding it]()
+- [Prefab Placement Editor](https://github.com/marmitaTH/Unity-Prefab-Placement-Editor)
