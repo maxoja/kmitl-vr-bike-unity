@@ -610,6 +610,11 @@ Prefab:
       propertyPath: _scale.y
       value: 0.15
       objectReference: {fileID: 0}
+    - target: {fileID: 114347427726338528, guid: a028013ceb53846c4b34b0c7befd9bad,
+        type: 2}
+      propertyPath: targetSplineId
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a028013ceb53846c4b34b0c7befd9bad, type: 2}
   m_IsPrefabParent: 0
@@ -938,6 +943,11 @@ Prefab:
       propertyPath: _scale.y
       value: 0.15
       objectReference: {fileID: 0}
+    - target: {fileID: 114347427726338528, guid: a028013ceb53846c4b34b0c7befd9bad,
+        type: 2}
+      propertyPath: targetSplineId
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a028013ceb53846c4b34b0c7befd9bad, type: 2}
   m_IsPrefabParent: 0
@@ -1221,6 +1231,11 @@ Prefab:
         type: 2}
       propertyPath: _scale.y
       value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 114347427726338528, guid: a028013ceb53846c4b34b0c7befd9bad,
+        type: 2}
+      propertyPath: targetSplineId
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a028013ceb53846c4b34b0c7befd9bad, type: 2}

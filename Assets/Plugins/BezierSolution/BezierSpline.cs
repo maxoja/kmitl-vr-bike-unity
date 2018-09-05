@@ -18,7 +18,9 @@ namespace BezierSolution
 
 		public int Count { get { return endPoints.Count; } }
 		public float Length { get { return GetLengthApproximately( 0f, 1f ); } }
-		
+
+        public int targetPlayerId = -1;
+
 		public BezierPoint this[int index]
 		{
 			get
@@ -31,7 +33,13 @@ namespace BezierSolution
 			}
 		}
 
-		private void Awake()
+        private void OnValidate()
+        {
+            if (targetPlayerId < 0)
+                Debug.LogError("target player id should not be negative");
+        }
+
+        private void Awake()
 		{
 			Refresh();
 		}
@@ -42,6 +50,19 @@ namespace BezierSolution
 			Refresh();
 		}
 #endif
+
+        static public BezierSpline GetSplineOfPlayer(int playerId)
+        {
+            BezierSpline[] splines = FindObjectsOfType<BezierSpline>();    
+
+            foreach(BezierSpline spline in splines)
+            {
+                if (spline.targetPlayerId == playerId)
+                    return spline;
+            }
+
+            return null;
+        }
 
 		public void Initialize( int endPointsCount )
 		{

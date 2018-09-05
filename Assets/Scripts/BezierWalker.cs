@@ -5,22 +5,22 @@ using BezierSolution;
 public class BezierWalker : MonoBehaviour
 {
     [SerializeField]
-    private BezierSpline spline;
+    private int targetSplineId = -1;
 
     [Range(20, 200), SerializeField]
     private float cacheQuality = 100;
-
-
-    //[Range(0, 0.15f), SerializeField]
-    //private float speed = 5f;
 
     [Range(0, 1), SerializeField]
     private float progress = 0f;
 
     private bool tickToCalculateCache = true;
+    private BezierSpline spline = null;
+    private float[] cache;
 
-    //[HideInInspector, SerializeField]
-     private float[] cache;
+    private void Awake()
+    {
+        spline = BezierSpline.GetSplineOfPlayer(targetSplineId);
+    }
 
     private void Start()
     {

@@ -81,6 +81,11 @@ namespace BezierSolution
 
 		public static void DrawSplineInspectorGUI( BezierSpline spline )
 		{
+            spline.targetPlayerId = EditorGUILayout.IntField("Target Player ID", spline.targetPlayerId);
+
+            if (spline.targetPlayerId < 0)
+                EditorGUILayout.HelpBox("Please set target player id", MessageType.Warning);
+
 			if( spline.Count < 2 )
 			{
 				if( GUILayout.Button( "Initialize Spline" ) )
